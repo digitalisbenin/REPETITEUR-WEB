@@ -162,7 +162,7 @@ export default {
 
       // Requête pour récupérer le profil
       const profileResponse = await axios.get(
-        "https://apirepetiteur.wadounnou.com/api/profile",
+        "https://www.api-mon-encadreur.com/api/profile",
         config
       );
       //console.log(profileResponse);
@@ -172,7 +172,7 @@ export default {
       // console.log(this.role_id);
       // console.log(this.user_id);
 
-      axios.get("https://apirepetiteur.wadounnou.com/api/parents").then((res) => {
+      axios.get("https://www.api-mon-encadreur.com/api/parents").then((res) => {
         this.parents = res.data.data.filter(
           (parent) => parent.user.id === this.user_id
         );
@@ -186,8 +186,8 @@ export default {
     getPayements() {
       setTimeout(() => {
         this.loading = false; // Set loading to false when data is fetched
-      }, 5000);
-      axios.get("https://apirepetiteur.wadounnou.com/api/payements").then((res) => {
+      }, 3000);
+      axios.get("https://www.api-mon-encadreur.com/api/payements").then((res) => {
         this.payement = res.data.data.filter(
           (payemet) => payemet.demande.enfants.parents.id === this.parentss_id
         );
@@ -196,7 +196,7 @@ export default {
       });
     },
     getAdmin(){
-    axios.get('https://apirepetiteur.wadounnou.com/api/users').then(res=>{
+    axios.get('https://www.api-mon-encadreur.com/api/users').then(res=>{
                 this.admin = res.data.data.filter(result =>
                    result.name === 'Supper Admin'
 
@@ -233,8 +233,8 @@ export default {
       this.demandId = demande_id;
       openKkiapayWidget({
         amount: prix,
-        api_key: "2dad4950979311ebb611b7e676b55ada",
-        sandbox: true,
+        api_key: "943b0af31e7672babe8b44e740cccf63dd66532b",
+        sandbox: false,
         phone: "",
       });
       //console.log(this.demandId);
@@ -259,7 +259,7 @@ export default {
       // console.log(this.demandId);
       axios
         .put(
-          "https://apirepetiteur.wadounnou.com/api/payements/" + this.demandId,
+          "https://www.api-mon-encadreur.com/api/payements/" + this.demandId,
           dataToSend,
           config
         )
@@ -276,7 +276,7 @@ export default {
 
         //console.log(notificationData);
 
-        axios.post('https://apirepetiteur.wadounnou.com/api/notifications', notificationData, config)
+        axios.post('https://www.api-mon-encadreur.com//api/notifications', notificationData, config)
           .then(notificationResponse => {
             //console.log(notificationResponse.data);
 
@@ -318,13 +318,13 @@ export default {
 
         //console.log(notificationData);
 
-        axios.post('https://apirepetiteur.wadounnou.com/api/notifications', notificationData, config)
+        axios.post('https://www.api-mon-encadreur.com/api/notifications', notificationData, config)
           .then(notificationResponse => {
             //console.log(notificationResponse.data);
 
             if (notificationResponse.status === 201) {
-              this.errorList = "Message envoyé avec succès";
-              alert('Message envoyé avec succès');
+              //this.errorList = "Message envoyé avec succès";
+              //alert('Message envoyé avec succès');
               this.$router.push('/admin/demande');
             }
           })

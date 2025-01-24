@@ -232,7 +232,7 @@
             
               <div class="flex justify-between mt-2">
               <button type="button" @click="openSecondModal(repetiteur.phone, repetiteur.dateLieuNaissance,repetiteur.description, repetiteur.sexe, repetiteur.ecole, repetiteur.experience ,repetiteur.adresse, repetiteur.commune.id, repetiteur.heureDisponibilite, repetiteur.grade, repetiteur.niveauEtude, repetiteur.situationMatrimoniale)" class=" text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center">Voir plus</button>
-                  <button type="button" @click="openModal(repetiteur.phone, repetiteur.dateLieuNaissance,repetiteur.description, repetiteur.sexe, repetiteur.ecole, repetiteur.experience ,repetiteur.adresse, repetiteur.commune.id, repetiteur.heureDisponibilite, repetiteur.grade, repetiteur.niveauEtude, repetiteur.situationMatrimoniale, repetiteur.identite)" class=" text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center">Mettre à jour</button>
+                  <button type="button" @click="openModal(repetiteur.phone, repetiteur.dateLieuNaissance,repetiteur.description, repetiteur.sexe, repetiteur.ecole, repetiteur.experience ,repetiteur.adresse, repetiteur.commune.id, repetiteur.heureDisponibilite, repetiteur.grade, repetiteur.niveauEtude, repetiteur.situationMatrimoniale, repetiteur.identite ,repetiteur.cycle)" class=" text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center">Mettre à jour</button>
               </div>
              
     
@@ -271,33 +271,34 @@
                         <input ref="profil_imageUrl" @change="onFileChange"  class="block w-full text-xl text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 " id="large_size" type="file">
           
                       </div>
+                      <div class="flex-1">
+                        <label class="block mb-2  text-2xl font-medium text-gray-900 " for="large_size">Pièces d'identité en pdf</label>
+                        <input type="file"  @change="identites" accept=".pdf"  class="block w-full  text-xl text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 " id="large_size" >
+          
+                      </div>
                     
                       <div class="flex-1">
-                        <label class="block mb-2 text-2xl font-medium text-gray-900 " for="large_size">Importer votre diplome</label>
+                        <label class="block mb-2 text-2xl font-medium text-gray-900 " for="large_size">Diplome en pdf</label>
                         <input type="file"  @change="handleFileUpload" accept=".pdf"  class="block w-full  text-xl text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 " id="large_size">
           
                       </div>
 
-                      <div class="flex-1">
+                      <!-- <div class="flex-1">
                         <label class="block mb-2 text-2xl font-medium text-gray-900 " for="large_size">Importer votre casier judiciaire</label>
                         <input  type="file"  @change="casierJudicaires" accept=".pdf"  class="block w-full  text-xl text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 " id="large_size">
-                      </div>  
+                      </div>   -->
                         
                       
                     </div>
                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                      
                       
-                    <div class="flex-1">
+                    <!-- <div class="flex-1">
                     <label class="block mb-2 text-2xl font-medium text-gray-900 " for="large_size">Importer l'attestation de résidence</label>
                     <input type="file"  @change="attestationResidences" accept=".pdf"  class="block w-full  text-xl text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 " id="large_size">
           
-                    </div>
-                    <div class="flex-1">
-                      <label class="block mb-2  text-2xl font-medium text-gray-900 " for="large_size">Importer votre pièces d'identité</label>
-                      <input type="file"  @change="identites" accept=".pdf"  class="block w-full  text-xl text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 " id="large_size" >
-        
-                    </div>
+                    </div> -->
+                   
                     </div>
                     <div class="grid gap-6 mb-6 md:grid-cols-4">
     
@@ -305,10 +306,10 @@
                           <label for="classe" class="block mb-2 text-lg font-medium text-gray-900 ">Classe</label>
                           <input type="text" name="classe" v-model="model.classe" id="classe" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 " placeholder="La où les classe(s) que vous enseignez" required>
                       </div> -->
-                      <div class="flex-1">
+                      <!-- <div class="flex-1">
                         <label for="phone" class="block mb-2 text-2xl font-medium text-gray-900 ">Téléphone</label>
                         <input type="number"  v-model="phone" name="phone" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="">
-                    </div>
+                    </div> -->
                     <div class="flex-1">
                       <label for="countries" class="block mb-2 text-2xl font-medium text-gray-900 ">Commune</label>
                       <select id="countries" v-model="commune" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required>
@@ -318,14 +319,26 @@
               
                      </div > 
                   <div class="flex-1">
-                    <label for="adresse" class="block mb-2 text-2xl font-medium text-gray-900 ">Détails Adresse</label>
+                    <label for="adresse" class="block mb-2 text-2xl font-medium text-gray-900 ">Adresse</label>
                     <input type="text" name="adresse"  v-model="adresse" id="adresse" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="" >
                 </div>
-                <div class="flex-1">
+                <!-- <div class="flex-1">
                   <label for="ecole" class="block mb-2 text-2xl font-medium text-gray-900 ">Ecole</label>
                   <input type="text" name="ecole"  v-model="ecole" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="">
-              </div>
-               
+              </div> -->
+              <div class="flex-1">
+                <label for="dateLieuNaissance" class="block mb-2 text-2xl font-medium text-gray-900 ">Age</label>
+                <input type="text" name="dateLieuNaissance"  v-model="dateLieuNaissance" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="" >
+            </div>
+            <div class="flex-1">
+              <label for="countries" class="block mb-2 text-2xl font-medium text-gray-900 ">Sexe</label>
+              <select id="countries" v-model="sexe" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " >
+               <option selected >Choisir votre sexe</option>
+              <option value="Homme" required>Homme</option>
+              <option value="Femme">Femme</option>
+              </select>
+  
+             </div >
             
                        </div>
             
@@ -353,51 +366,80 @@
                           
                         
                       <!-- </div> -->
+
+                      
                      
                          <div class="grid gap-6 mb-6 md:grid-cols-4">
                           <div class="flex-1">
-                            <label for="grade" class="block mb-2 text-2xl font-medium text-gray-900 ">Grade</label>
-                            <input type="text" name="grade"  v-model="grade" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="">
+                            <label for="grade" class="block mb-2 text-2xl font-medium text-gray-900 ">Statut</label>
+                           
+                            <select id="countries" v-model="grade" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " >
+                              <option selected >Choisir votre statut</option>
+                             <option value="Etudiant" required>Etudiant</option>
+                             <option value="Enseignant">Enseignant</option>
+                             <option value="Autre professsioneel">Autre professionnel</option>
+                             </select>
                         </div>
+                        
                         <div class="flex-1">
-                          <label for="countries" class="block mb-2 text-2xl font-medium text-gray-900 ">Sexe</label>
-                          <select id="countries" v-model="sexe" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " >
-                           <option selected >Choisir votre sexe</option>
-                          <option value="Homme" required>Homme</option>
-                          <option value="Femme">Femme</option>
-                          </select>
-              
-                         </div >
-                         <div class="flex-1">
-                          <label for="heureDisponibilite" class="block mb-2 text-2xl font-medium text-gray-900 ">Heure de Disponibilité</label>
-                          <input type="text" name="heureDisponibilite"  v-model="heureDisponibilite" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="">
-                      </div> 
-                       
+                          <label for="grade" class="block mb-2 text-2xl font-medium text-gray-900 ">Cycle de l'encadrement</label>
+                         
+                          <select id="countries" v-model="cycle" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " >
+                            <option selected >Choisir votre cycle</option>
+                           <option value="Primaires" required>Primaires</option>
+                           <option value="Secondaires">secondaires</option>
+                           <option value="Universitaires">Universitaires</option>
+                           </select>
+                      </div>
                       <div class="flex-1">
-                        <label for="dateLieuNaissance" class="block mb-2 text-2xl font-medium text-gray-900 ">Date et lieu de naissance</label>
-                        <input type="text" name="dateLieuNaissance"  v-model="dateLieuNaissance" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="" >
+                        <label for="situationMatrimoniale" class="block mb-2 text-2xl font-medium text-gray-900 ">Situation matrimoniale</label>
+                       
+                        <select id="countries" v-model="situationMatrimoniale" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " >
+                          <option selected >Choisir votre situation</option>
+                         <option value="Célibataire" required>Célibataire</option>
+                         <option value="Marié">Marié</option>
+                         <option value="Autre">Autre</option>
+                         </select>
                     </div>
+                    <div class="flex-1">
+                      <label for="ecole" class="block mb-2 text-2xl font-medium text-gray-900 ">Niveau d'etude</label>
+                     
+                      <select id="countries" v-model="niveauEtude" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " >
+                        <option selected >Choisir votre niveau</option>
+                       <option value="BEPC" required>BEPC</option>
+                       <option value="BAC">BAC</option>
+                       <option value=" Licence">Licence</option>
+                       <option value=" Master/DEA">Master/DEA</option>
+                       <option value=" Doctorat">Doctorat</option>
+                       </select>
+                  </div>
+                     
                    
                          </div>
-                          <div class="grid gap-6 mb-6 md:grid-cols-4">
-                            <div class="flex-1">
-                              <label for="ecole" class="block mb-2 text-2xl font-medium text-gray-900 ">Niveau d'etude</label>
-                              <input type="text" name="ecole"  v-model="niveauEtude" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="" >
-                          </div>
+                          <div class="grid gap-6 mb-6 md:grid-cols-3">
+                            
                          
                        
                          <div class="flex-1">
                           <label for="experience" class="block mb-2 text-2xl font-medium text-gray-900 ">Expérience</label>
-                          <input type="text"  v-model="experience" name="experience" id="experience" placeholder="" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+                         
+                          <select id="countries" v-model="experience" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " >
+                            <option selected >Choisir votre expérience</option>
+                           <option value="Débutant" required>Débutant</option>
+                           <option value="2ans d'expérience">2ans d'expérience</option>
+                           <option value="2ans à 5ans d'expérience">2ans à 5ans d'expérience</option>
+                           <option value="Plus de 5ans d'expérience">Plus de 5ans d'expérience</option>
+                           </select>
                       </div>
+                      <div class="flex-1">
+                        <label for="heureDisponibilite" class="block mb-2 text-2xl font-medium text-gray-900 ">Heure de Disponibilité</label>
+                        <input type="text" name="heureDisponibilite"  v-model="heureDisponibilite" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="">
+                    </div> 
                       <div class="flex-1">
                         <label for="description" class="block mb-2 text-2xl font-medium text-gray-900 ">Description</label>
                         <input type="text" name="description"  v-model="description" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="" >
                     </div>
-                    <div class="flex-1">
-                      <label for="situationMatrimoniale" class="block mb-2 text-2xl font-medium text-gray-900 ">Situation matrimoniale</label>
-                      <input type="text" name="situationMatrimoniale"  v-model="situationMatrimoniale" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="" >
-                  </div>
+                   
                           </div>
 
                     <div class="flex justify-end">
@@ -445,7 +487,7 @@
                       </div> -->
                       <div class="flex-1">
                         <label for="phone" class="block mb-2 text-2xl font-medium text-gray-900 ">Téléphone</label>
-                        <h4 class="text-xl">{{ repetiteur.phone }}</h4>
+                        <h4 class="text-xl">{{ repetiteur.user.phone }}</h4>
                        
                     </div>
                     <div class="flex-1">
@@ -455,13 +497,13 @@
               
                      </div > 
                   <div class="flex-1">
-                    <label for="adresse" class="block mb-2 text-2xl font-medium text-gray-900 ">Détails Adresse</label>
+                    <label for="adresse" class="block mb-2 text-2xl font-medium text-gray-900 "> Adresse</label>
                      <h4 class="text-xl">{{ repetiteur.adresse }}</h4>
                    
                 </div>
                 <div class="flex-1">
-                  <label for="ecole" class="block mb-2 text-2xl font-medium text-gray-900 ">Ecole</label>
-                  <h4 class="text-xl">{{ repetiteur.ecole }}</h4>
+                  <label for="ecole" class="block mb-2 text-2xl font-medium text-gray-900 ">Cycle de l' encadrement</label>
+                  <h4 class="text-xl">{{ repetiteur.cycle }}</h4>
                  
               </div>
                
@@ -495,7 +537,7 @@
                      
                          <div class="grid gap-6 mb-6 md:grid-cols-3">
                           <div class="flex-1">
-                            <label for="grade" class="block mb-2 text-2xl font-medium text-gray-900 ">Grade</label>
+                            <label for="grade" class="block mb-2 text-2xl font-medium text-gray-900 ">Statut</label>
                             <h4 class="text-xl">{{ repetiteur.grade }}</h4>
                            
                         </div>
@@ -508,8 +550,8 @@
                          
                        
                       <div class="flex-1">
-                        <label for="dateLieuNaissance" class="block mb-2 text-2xl font-medium text-gray-900 ">Date et lieu de naissance</label>
-                        <h4 class="text-xl">{{ repetiteur.dateLieuNaissance }}</h4>
+                        <label for="dateLieuNaissance" class="block mb-2 text-2xl font-medium text-gray-900 ">Age</label>
+                        <h4 class="text-xl">{{ repetiteur.dateLieuNaissance }} ans</h4>
                        
                     </div>
                    
@@ -592,6 +634,7 @@
                 casierJudicaire:'',
                 attestationResidence:'',
                 
+                  cycle:'',
                   phone:'',
                 adresse:'',
                 commune:'',
@@ -638,7 +681,7 @@
     },
           openModal(enfantId, dateLieuNaissance,
           description ,sexe,ecole,experience,
-           adresse, commune, heure, grade, niveau, situation, identite) {
+           adresse, commune, heure, grade, niveau, situation, identite ,cycles) {
       this.isModalOpen = true;
       this.phone=enfantId
       this.dateLieuNaissance=dateLieuNaissance
@@ -653,6 +696,7 @@
       this.niveauEtude=niveau
       this.situationMatrimoniale=situation
       this.identite=identite
+      this.cycle=cycles
      
     },
     closeModal() {
@@ -715,7 +759,7 @@
           formData.append("file", this.image);
     
           axios
-            .post("https://apirepetiteur.wadounnou.com/api/medias", formData, {
+            .post("https://www.api-mon-encadreur.com/api/medias", formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },
@@ -742,7 +786,7 @@
           console.log(this.pdf);
     
           axios
-            .post("https://apirepetiteur.wadounnou.com/api/medias", formData, {
+            .post("https://www.api-mon-encadreur.com/api/medias", formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },
@@ -769,7 +813,7 @@
           console.log(this.pdfidentite);
     
           axios
-            .post("https://apirepetiteur.wadounnou.com/api/medias", formData, {
+            .post("https://www.api-mon-encadreur.com/api/medias", formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },
@@ -777,7 +821,7 @@
             .then((response) => {
                // console.log(response);
               if (response.status == 201) {
-                console.log(response);
+               // console.log(response);
                 this.identite = response.data.data.media_url;
                 //console.log(this.identite);
                // this.sendpdfcasierJudicaires();
@@ -792,10 +836,10 @@
           const formData = new FormData();
     
           formData.append("file", this.pdfcasierJudicaires);
-          console.log(this.pdfcasierJudicaires);
+         // console.log(this.pdfcasierJudicaires);
     
           axios
-            .post("https://apirepetiteur.wadounnou.com/api/medias", formData, {
+            .post("https://www.api-mon-encadreur.com/api/medias", formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },
@@ -818,16 +862,16 @@
           const formData = new FormData();
     
           formData.append("file", this.pdfattestationResidence);
-          console.log(this.pdfattestationResidence);
+         // console.log(this.pdfattestationResidence);
     
           axios
-            .post("https://apirepetiteur.wadounnou.com/api/medias", formData, {
+            .post("https://www.api-mon-encadreur.com/api/medias", formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },
             })
             .then((response) => {
-                console.log(response);
+               // console.log(response);
               if (response.status == 201) {
                 //console.log(response);
                 this.attestationResidence = response.data.data.media_url;
@@ -841,15 +885,15 @@
             });
         },
         getCommune(){
-        axios.get('https://apirepetiteur.wadounnou.com/api/communes').then(res=>{
+        axios.get('https://www.api-mon-encadreur.com/api/communes').then(res=>{
                 this.communes=res.data.data
-                console.log(this.commune)
+                //console.log(this.commune)
                
             });
 
       },
             getMatiere(){
-                axios.get('https://apirepetiteur.wadounnou.com/api/matieres').then(res=>{
+                axios.get('https://www.api-mon-encadreur.com/api/matieres').then(res=>{
                     this.matiere=res.data.data
                    // console.log(this.matiere)
                    // console.log(res)
@@ -859,14 +903,14 @@
             
                 const token = localStorage.getItem('token');
                
-                console.log(token);
+                //console.log(token);
                 const config={
                     headers: {
             'Authorization': 'Bearer ' + token // Bearer 14|LhMjIdjCKZjxzEeSHNOOE0eQUUCM28lHQ6JbW1pOb16e3fa8 // Remplacez par le token d'authentification réel
           }
                 };
-                console.log(config);
-         axios.get('https://apirepetiteur.wadounnou.com/api/profile',config)
+                //console.log(config);
+         axios.get('https://www.api-mon-encadreur.com/api/profile',config)
         .then(response => {
           this.user_id = response.data.id;
           localStorage.setItem('user_id',response.data.id)
@@ -886,20 +930,20 @@
     },
    async getnotification(){
     
-      console.log(this.user_id);
-         const notificationsResponse = await axios.get("https://apirepetiteur.wadounnou.com/api/notifications");
+      //console.log(this.user_id);
+         const notificationsResponse = await axios.get("https://www.api-mon-encadreur.com/api/notifications");
       
-        console.log(notificationsResponse);
-        console.log(this.user_id);
+        //console.log(notificationsResponse);
+        //console.log(this.user_id);
      this.notifications = notificationsResponse.data.data.filter((notificat) => notificat.status == "Non lu" &&
      notificat.user.id === this.user_id
      );
      this.Numbere = this.notifications.length;
      this.notif_id = this.notifications.map(notification => notification.id);
-     console.log(this.user_id);
-     console.log(this.notifications);
-     console.log(this.Numbere);
-     console.log(this.notif_id);
+     //console.log(this.user_id);
+    // console.log(this.notifications);
+    // console.log(this.Numbere);
+     //console.log(this.notif_id);
     },
     updateNotifications(){
       const token = localStorage.getItem("token");
@@ -913,7 +957,7 @@
       // console.log(config);
      // console.log(this.notif_id);
       const newStatus = "Lu";  // Remplacez 'nouveauStatut' par le statut souhaité.
-const apiUrl = 'https://apirepetiteur.wadounnou.com/api/notifications';  // Remplacez par l'URL correcte de votre API.
+const apiUrl = 'https://www.api-mon-encadreur.com/api/notifications';  // Remplacez par l'URL correcte de votre API.
 
 // Utilisez une boucle pour envoyer une requête pour chaque ID.
 this.notif_id.forEach(id => {
@@ -942,7 +986,7 @@ this.notif_id.forEach(id => {
            async getrepetiteur(){
             setTimeout(() => {
         this.loading = false; // Set loading to false when data is fetched
-      }, 5000);
+      }, 3000);
                
             const token = localStorage.getItem('token');
                 const config = {
@@ -954,15 +998,15 @@ this.notif_id.forEach(id => {
      // console.log(config);
 
       // Requête pour récupérer le profil
-      const profileResponse  = await axios.get('https://apirepetiteur.wadounnou.com/api/profile', config);
-        console.log(profileResponse);
+      const profileResponse  = await axios.get('https://www.api-mon-encadreur.com/api/profile', config);
+      //  console.log(profileResponse);
       // Stocker les données du profil dans le composant ou Vuex
       this.role_id = profileResponse.data.role_id;
       this.user_id = profileResponse.data.id;
       //console.log(this.role_id);
       //console.log(this.user_id);
 
-    axios.get('https://apirepetiteur.wadounnou.com/api/repetiteurs').then(res=>{
+    axios.get('https://www.api-mon-encadreur.com/api/repetiteurs').then(res=>{
                 this.repetiteurs = res.data.data.filter(repetiteur => repetiteur.user.id === this.user_id)
                   
                 //console.log(this.repetiteurs)
@@ -972,19 +1016,19 @@ this.notif_id.forEach(id => {
             });
 
            
-            console.log(this.repetiteurs_id);
-            axios.get('https://apirepetiteur.wadounnou.com/api/demandes').then(res=>{
-              console.log('Données de la requête:', res.data);
+            //console.log(this.repetiteurs_id);
+            axios.get('https://www.api-mon-encadreur.com/api/demandes').then(res=>{
+             // console.log('Données de la requête:', res.data);
                 this.enfants=res.data.data.filter(enfant => enfant.repetiteur.id === this.repetiteurs_id && enfant.status==='Validé'
                 
                 );
-                console.log('Enfants filtrés:', this.enfants);
+                //console.log('Enfants filtrés:', this.enfants);
                this.nombre=this.enfants.length
-               console.log('Nombre total:', this.nombre);
+               //console.log('Nombre total:', this.nombre);
             });
-            console.log( this.enfants.length);
-            console.log( this.nombre);
-            console.log(  this.enfants);
+           // console.log( this.enfants.length);
+           // console.log( this.nombre);
+            //console.log(  this.enfants);
        
            
           
@@ -995,8 +1039,8 @@ this.notif_id.forEach(id => {
                 var mythis= this;
                 const token = localStorage.getItem('token');
                 const user_id= this.user_id
-                console.log(user_id);
-                console.log(this.repetiteurs_id);
+               // console.log(user_id);
+                //console.log(this.repetiteurs_id);
                 const dataToSend = {
     
                     phone:this.phone,
@@ -1024,29 +1068,35 @@ this.notif_id.forEach(id => {
             'Authorization': 'Bearer ' + token // Bearer 14|LhMjIdjCKZjxzEeSHNOOE0eQUUCM28lHQ6JbW1pOb16e3fa8 // Remplacez par le token d'authentification réel
           }
                 };
-    console.log(dataToSend);
-    console.log(this.repetiteurs_id);
-                axios.put('https://apirepetiteur.wadounnou.com/api/repetiteurs/'+ this.repetiteurs_id, dataToSend,config )
+    //console.log(dataToSend);
+   // console.log(this.repetiteurs_id);
+                axios.put('https://www.api-mon-encadreur.com/api/repetiteurs/'+ this.repetiteurs_id, dataToSend,config )
     .then(response => {
       // Gérer la réponse de la requête POST
-      console.log(response)
-      console.log(response.data)
+      //console.log(response)
+      //console.log(response.data)
     
                    
                     mythis.errorList=response.data.message
                  //   alert(response.data.message);
                     if (response.status===200) {
-                        mythis.errorList="Compte répétiteurs mise à jour avec succès"
+                        //mythis.errorList="Compte répétiteurs mise à jour avec succès"
                         //alert('Compte répétiteurs mise à jour avec succès')
                         Swal.fire({
-                    title:"Compte répétiteurs mise à jour avec succès",
+                    title:"Compte encadreur mise à jour avec succès",
                     icon: 'success',
-                    confirmButtonText: 'OK'
+                    showConfirmButton: false,
+                    timer: 5000
                   });
                         this.$router.push('/admin/dashboard');
                     }
                     else{
-                      mythis.errorList="une erreur s'est produite vueillez réessayer plus tard"
+                      Swal.fire({
+                    title:"Quelques chose s'est mal passé veuillez réessayer plus tard",
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 5000
+                  });
                     }
 
     })
@@ -1057,9 +1107,10 @@ this.notif_id.forEach(id => {
                 Swal.fire({
                     title:"Quelques chose s'est mal passé veuillez réessayer plus tard",
                     icon: 'error',
-                    confirmButtonText: 'OK'
+                    showConfirmButton: false,
+                    timer: 5000
                   });
-                this.errorList = "une erreur s'est produite veuiller réessayer ";
+               // this.errorList = "une erreur s'est produite veuiller réessayer ";
     
             } else if (error.request) {
                 console.log(error.request);

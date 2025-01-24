@@ -124,7 +124,7 @@ headers: {
 //console.log(config);
 
 // Requête pour récupérer le profil
-const profileResponse  =await axios.get('https://apirepetiteur.wadounnou.com/api/profile', config);
+const profileResponse  =await axios.get('https://www.api-mon-encadreur.com/api/profile', config);
 //console.log(profileResponse);
 // Stocker les données du profil dans le composant ou Vuex
 this.role_id = profileResponse.data.role_id;
@@ -132,7 +132,7 @@ this.user_id = profileResponse.data.id;
 //console.log(this.role_id);
 //console.log(this.user_id);
 
-axios.get('https://apirepetiteur.wadounnou.com/api/parents').then(res=>{
+axios.get('https://www.api-mon-encadreur.com/api/parents').then(res=>{
     this.parents = res.data.data.filter(parent => parent.user.id === this.user_id)
       
     //console.log(this.parents)
@@ -146,12 +146,12 @@ getDemande(){
   setTimeout(() => {
         this.loading = false; // Set loading to false when data is fetched
       }, 5000);
-            axios.get('https://apirepetiteur.wadounnou.com/api/demandes').then(res=>{
+            axios.get('https://www.api-mon-encadreur.com/api/demandes').then(res=>{
                 this.demande=res.data.data.filter(payemet => payemet.enfants.parents.id === this.parentss_id)
-                console.log(this.demande)
+                //console.log(this.demande)
                 this.classe=this.demande.map(item => item.tarification.classe.id)
-                console.log( this.classe)
-                console.log(res)
+               // console.log( this.classe)
+                //console.log(res)
             });
             this.getEpreuve();
         },
@@ -160,7 +160,7 @@ getDemande(){
         setTimeout(() => {
         this.loading = false; // Set loading to false when data is fetched
       }, 3000);
-          axios.get('https://apirepetiteur.wadounnou.com/api/epreuves').then(res=>{
+          axios.get('https://www.api-mon-encadreur.com/api/epreuves').then(res=>{
               this.epreuves=res.data.data
               //console.log(this.epreuves)
               //console.log(this.classe)

@@ -7,6 +7,7 @@ import { createRouter, createWebHistory } from 'vue-router'
  import Register from '@/views/public/Inscription/Register.vue';
  import Login from '@/views/public/Connexion/Login.vue';
  import ForgotPassword from '@/views/public/Auth/ForgotPassword.vue';
+ import ResetPassword from '@/views/public/Auth/ResetPassword.vue';
  import Partenaire from '@/views/public/ecole/partenaire.vue';
  import Librairie from '@/views/public/librairie/Librairie.vue';
  import Examens from '@/views/public/examen/Examen.vue';
@@ -58,6 +59,9 @@ const router = createRouter({
         },
         {path: '/auth/forgot-password', name: 'forget',component:ForgotPassword
       
+        },
+        { path: '/auth/password/reset', name:'reset', component: ResetPassword, 
+          
         },
         {path: '/about', name: 'about',component: AboutView
         },

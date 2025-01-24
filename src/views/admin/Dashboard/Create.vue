@@ -160,7 +160,7 @@
                     </div>
                     <div class="grid gap-6 mb-3 md:grid-cols-2">
                         <div class="flex-1">
-                            <label for="phone"  class="block mb-2 text-start px-3 text-2xl font-medium text-gray-900">Matricule du répétiteur</label>
+                            <label for="phone"  class="block mb-2 text-start px-3 text-2xl font-medium text-gray-900">Matricule de l'encadreur</label>
                            <input type="text" @input="getRepetiteur"  v-model="matricule" name="phone" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="" required>
                             <div  v-if="matricule.length > 0 && repetiteurs.length > 0"> 
                             <h2></h2>
@@ -280,7 +280,7 @@ export default {
       }
             };
            // console.log(config);
-     axios.get('https://apirepetiteur.wadounnou.com/api/profile',config)
+     axios.get('https://www.api-mon-encadreur.com/api/profile',config)
     .then(response => {
       this.user_id = response.data.id;
     //   console.log(response);
@@ -297,7 +297,7 @@ export default {
     });
     this.getParents();
 
-    axios.get('https://apirepetiteur.wadounnou.com/api/users').then(res=>{
+    axios.get('https://www.api-mon-encadreur.com/api/users').then(res=>{
                 this.admin = res.data.data.filter(result =>
                    result.name === 'Supper Admin'
 
@@ -313,24 +313,24 @@ export default {
 
             
 
-            axios.get('https://apirepetiteur.wadounnou.com/api/tarifications').then(res=>{
+            axios.get('https://www.api-mon-encadreur.com/api/tarifications').then(res=>{
                 this.tarification=res.data.data
                 // console.log(this.tarification)
                 // console.log(res)
             });
 
-            axios.get('https://apirepetiteur.wadounnou.com/api/classes').then(res=>{
+            axios.get('https://www.api-mon-encadreur.com/api/classes').then(res=>{
                 this.classes= res.data.data;
                 // console.log(this.classe)
                 // console.log(res)
             });
 
-            axios.get('https://apirepetiteur.wadounnou.com/api/matieres').then(res=>{
+            axios.get('https://www.api-mon-encadreur.com/api/matieres').then(res=>{
                 this.matiere= res.data.data
                 // console.log(this.matiere)
                 // console.log(res)
             });
-            axios.get('https://apirepetiteur.wadounnou.com/api/enfants').then(res=>{
+            axios.get('https://www.api-mon-encadreur.com/api/enfants').then(res=>{
                 this.enfants=res.data.data.filter(result =>
                 // result.status ==='Terminer' &&
                     result.parents.id === this.parents_id
@@ -348,7 +348,7 @@ export default {
             // console.log('test');
             // console.log(this.user_id);
             
-            axios.get('https://apirepetiteur.wadounnou.com/api/parents').then(res=>{
+            axios.get('https://www.api-mon-encadreur.com/api/parents').then(res=>{
                 this.parents=res.data.data.filter(parent => parent.user.id === this.user_id)
                 //console.log(this.parents)
                 this.parents_id= this.parents[0].id
@@ -360,7 +360,7 @@ export default {
        
         getEnfants(){
             //console.log(this.parents_id);
-            axios.get('https://apirepetiteur.wadounnou.com/api/enfants').then(res=>{
+            axios.get('https://www.api-mon-encadreur.com/api/enfants').then(res=>{
                 this.enfants=res.data.data.filter(result =>
                 // result.status ==='Terminer' &&
                     result.parents.id === this.parents_id
@@ -372,7 +372,7 @@ export default {
         },
         getTarification(){
             const token = localStorage.getItem('token');
-            axios.get('https://apirepetiteur.wadounnou.com/api/tarifications').then(res=>{
+            axios.get('https://www.api-mon-encadreur.com/api/tarifications').then(res=>{
                 this.tarification=res.data.data
                 // console.log(this.tarification)
                 // console.log(res)
@@ -380,7 +380,7 @@ export default {
         },
         getClasses(){
             const token = localStorage.getItem('token');
-            axios.get('https://apirepetiteur.wadounnou.com/api/classes').then(res=>{
+            axios.get('https://www.api-mon-encadreur.com/api/classes').then(res=>{
                 this.classes= res.data.data;
                 // console.log(this.classe)
                 // console.log(res)
@@ -390,7 +390,7 @@ export default {
        
         getMatiere(){
             const token = localStorage.getItem('token');
-            axios.get('https://apirepetiteur.wadounnou.com/api/matieres').then(res=>{
+            axios.get('https://www.api-mon-encadreur.com/api/matieres').then(res=>{
                 this.matiere= res.data.data
                 // console.log(this.matiere)
                 // console.log(res)
@@ -399,7 +399,7 @@ export default {
         },
         getPrix() {
     const token = localStorage.getItem('token');
-    axios.get('https://apirepetiteur.wadounnou.com/api/tarifications').then(res => {
+    axios.get('https://www.api-mon-encadreur.com/api/tarifications').then(res => {
         this.prixe = res.data.data.filter(result =>
             result.matiere.id === this.matiere_id &&
             result.classe.id === this.classe_id
@@ -425,7 +425,7 @@ export default {
 },
 
 getRepetiteurs(){
-    axios.get('https://apirepetiteur.wadounnou.com/api/repetiteurs').then(res=>{
+    axios.get('https://www.api-mon-encadreur.com/api/repetiteurs').then(res=>{
                 this.repetit = res.data.data.filter(result =>
                    result.traitementDossiers === 'Validé'
 
@@ -438,7 +438,7 @@ getRepetiteurs(){
 
 },
 getAdmin(){
-    axios.get('https://apirepetiteur.wadounnou.com/api/users').then(res=>{
+    axios.get('https://www.api-mon-encadreur.com/api/users').then(res=>{
                 this.admin = res.data.data.filter(result =>
                    result.name === 'Supper Admin'
 
@@ -478,7 +478,7 @@ getAdmin(){
             // console.log(this.classe_id);
             // console.log(this.matricule);
             
-            axios.get('https://apirepetiteur.wadounnou.com/api/repetiteurmcs').then(res=>{
+            axios.get('https://www.api-mon-encadreur.com/api/repetiteurmcs').then(res=>{
                // console.log(res.data.data);
                 this.repetiteurs = res.data.data.filter(result =>
                 result.matiere.id === this.matiere_id &&
@@ -521,7 +521,7 @@ getAdmin(){
     },
   };
 
-  axios.post("https://apirepetiteur.wadounnou.com/api/enfants", dataToSend, config)
+  axios.post("https://www.api-mon-encadreur.com/api/enfants", dataToSend, config)
     .then((response) => {
       if (response.status === 201) {
         const enfantId = response.data.data.id;
@@ -535,7 +535,7 @@ getAdmin(){
           enfants_id: enfantId,
         };
 
-        axios.post('https://apirepetiteur.wadounnou.com/api/demandes', dataToSends, config)
+        axios.post('https://www.api-mon-encadreur.com/api/demandes', dataToSends, config)
           .then(res => {
             if (res.status === 201) {
               const demandeId = res.data.data.id;
@@ -548,14 +548,15 @@ getAdmin(){
                 message: "Nouvelle demande",
               };
 
-              axios.post('https://apirepetiteur.wadounnou.com/api/notifications', dataToSen, config)
+              axios.post('https://www.api-mon-encadreur.com/api/notifications', dataToSen, config)
                 .then(response => {
                   if (response.status === 201) {
                     //this.errorList = "Demande effectuée avec succès";
                     Swal.fire({
                     title: 'Demande effectuée avec succès',
                     icon: 'success',
-                    confirmButtonText: 'OK'
+                               showConfirmButton: false,
+                    timer: 5000
                   });
                     //alert('Demande effectuée avec succès');
                     this.$router.push('/admin/demande');
@@ -568,7 +569,8 @@ getAdmin(){
                       Swal.fire({
                     title: "Quelques choses s'est mal passé veuillez réessayer plus tard",
                     icon: 'error',
-                    confirmButtonText: 'OK'
+                               showConfirmButton: false,
+                    timer: 5000
                   });
                       
                       this.errorList = error.response.data.errors;
@@ -589,7 +591,8 @@ getAdmin(){
                 Swal.fire({
                     title: "Quelques choses s'est mal passé veuillez réessayer plus tard",
                     icon: 'error',
-                    confirmButtonText: 'OK'
+                               showConfirmButton: false,
+                    timer: 5000
                   });
                 this.errorList = error.response.data.errors;
               }
@@ -627,7 +630,7 @@ getAdmin(){
 //       };
 //       console.log(dataToSend);
 //       axios
-//         .post("https://apirepetiteur.wadounnou.com/api/enfants", dataToSend, config)
+//         .post("https://www.api-mon-encadreur.com/api/enfants", dataToSend, config)
 //         .then((response) => {
 //           // Gérer la réponse de la requête POST
 //           console.log(response)
@@ -680,7 +683,7 @@ getAdmin(){
 //           };
 //           //console.log(config);
 // //console.log(dataToSends);
-//            axios.post( 'https://apirepetiteur.wadounnou.com/api/demandes',dataToSends,config ).then(res =>{
+//            axios.post( 'https://www.api-mon-encadreur.com/api/demandes',dataToSends,config ).then(res =>{
 
 //               // console.log(res.data)
 //               // alert(res.data.message);
@@ -698,7 +701,7 @@ getAdmin(){
 
 // //console.log(dataToSen);
 
-// axios.post('https://apirepetiteur.wadounnou.com/api/notifications', dataToSen, config)
+// axios.post('https://www.api-mon-encadreur.com/api/notifications', dataToSen, config)
 //  .then(response => {
 //   // console.log(response.data);
 //    if (response.status === 201) {

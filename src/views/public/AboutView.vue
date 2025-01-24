@@ -68,11 +68,11 @@
                       <h1 class="text-3xl lg:text-3xl font-bold leading-9 text-gray-800 pb-4">DIGITALIS</h1>
                       <p class="font-normal text-lg leading-7 text-gray-600">Vous avez besoin de nos prestations ou formations, n'hésitez pas à nous joindre.</p>
                           <!-- <p  class="font-normal text-lg leading-7 text-gray-600"> Contactez-nous</p> -->
-                          <p class="font-normal text-lg leading-7 text-gray-600">Email : contact01.digitalis@gmail.com
+                          <p class="font-normal text-lg leading-7 text-gray-600">Email :info@mon-encadreur.com
 
                             </p>
                             <p class="font-normal text-lg leading-7 text-gray-600">
-                                Téléphone : +229 97825820
+                                Téléphones : 0197825820 / 0194863786
                             </p>
                   </div>
                  

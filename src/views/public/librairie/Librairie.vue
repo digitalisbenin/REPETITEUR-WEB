@@ -56,7 +56,7 @@
 
   methods:{
     getLibrairie(){
-      axios.get('https://apirepetiteur.wadounnou.com/api/librairies',)
+      axios.get('https://www.api-mon-encadreur.com/api/librairies',)
    .then(response => {
      this.librairie = response.data.data;
      //console.log( this.librairie);

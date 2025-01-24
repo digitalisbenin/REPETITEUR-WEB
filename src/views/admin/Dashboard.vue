@@ -272,7 +272,7 @@
       //console.log(config);
 
       // Requête pour récupérer le profil
-      const profileResponse  = await axios.get('https://apirepetiteur.wadounnou.com/api/profile', config);
+      const profileResponse  = await axios.get('https://www.api-mon-encadreur.com/api/profile', config);
         //console.log(profileResponse);
       // Stocker les données du profil dans le composant ou Vuex
       this.role_id = profileResponse.data.role_id;
@@ -280,7 +280,7 @@
       //console.log(this.role_id);
       //console.log(this.user_id);
 
-    axios.get('https://apirepetiteur.wadounnou.com/api/repetiteurs').then(res=>{
+    axios.get('https://www.api-mon-encadreur.com/api/repetiteurs').then(res=>{
                 this.repetiteurs = res.data.data.filter(repetiteur => repetiteur.user.id === this.user_id)
                   
                 //console.log(this.repetiteurs)
@@ -295,12 +295,12 @@
        async getEnfants(studentId){
         setTimeout(() => {
         this.loading = false; // Set loading to false when data is fetched
-      }, 7000);
+      }, 3000);
             const repetiteur_id = localStorage.getItem('repetiteur_id');
            // console.log(repetiteur_id);
            // console.log(studentId)
            // console.log(this.repetiteurs_id);
-           await axios.get('https://apirepetiteur.wadounnou.com/api/demandes').then(res=>{
+           await axios.get('https://www.api-mon-encadreur.com/api/demandes').then(res=>{
                 this.enfants=res.data.data.filter(enfant => enfant.repetiteur.id === this.repetiteurs_id);
                 //console.log(this.enfants)
                
@@ -309,14 +309,14 @@
         },
         getMatiere(){
            
-            axios.get('https://apirepetiteur.wadounnou.com/api/matieres').then(res=>{
+            axios.get('https://www.api-mon-encadreur.com/api/matieres').then(res=>{
                 this.matiere=res.data.data
                 //console.log(this.matiere)
                 //console.log(res)
             });
         },
         getClasse(){
-            axios.get('https://apirepetiteur.wadounnou.com/api/classes').then(res=>{
+            axios.get('https://www.api-mon-encadreur.com/api/classes').then(res=>{
                 this.classe=res.data.data
                 //console.log(this.classe)
                 //console.log(res)
@@ -343,7 +343,7 @@ const token = localStorage.getItem('token');
            };
            //console.log(config);
 //console.log(dataToSend);
-            axios.post( 'https://apirepetiteur.wadounnou.com/api/repetiteurmcs',dataToSend,config ).then(res =>{
+            axios.post( 'https://www.api-mon-encadreur.com/api/repetiteurmcs',dataToSend,config ).then(res =>{
 
                 //console.log(res.data)
                // alert(res.data.message);
@@ -356,7 +356,8 @@ const token = localStorage.getItem('token');
                     Swal.fire({
                     title:"Matiere et Classe enregister avec succès",
                     icon: 'success',
-                    confirmButtonText: 'OK'
+                    showConfirmButton: false,
+                    timer: 5000
                   });
                    // this.$router.push('/admin/demande')
                   
@@ -404,7 +405,7 @@ const token = localStorage.getItem('token');
 //console.log(dataToSend);
 //console.log(this.repetiteurs_id);
 
-      axios.put('https://apirepetiteur.wadounnou.com/api/repetiteurs/'+this.repetiteurs_id,dataToSend,config)
+      axios.put('https://www.api-mon-encadreur.com/api/repetiteurs/'+this.repetiteurs_id,dataToSend,config)
 .then(response => {
   // La mise à jour a réussi, vous pouvez traiter la réponse ici
   //console.log(response.data);
@@ -440,8 +441,8 @@ const token = localStorage.getItem('token');
      }
            };
            //console.log(config);
-//console.log(dataToSend);https://apirepetiteur.wadounnou.com/
-            axios.post( "https://apirepetiteur.wadounnou.com/api/postes",dataToSend,config ).then(res =>{
+//console.log(dataToSend);https://www.api-mon-encadreur.com/
+            axios.post( "https://www.api-mon-encadreur.com/api/postes",dataToSend,config ).then(res =>{
 
                 //console.log(res.data)
                // alert(res.data.message);
@@ -454,7 +455,8 @@ const token = localStorage.getItem('token');
                     Swal.fire({
                     title:"Appréciation enregister avec succès",
                     icon: 'success',
-                    confirmButtonText: 'OK'
+                    showConfirmButton: false,
+                    timer: 5000
                   });
                    // this.$router.push('/admin/demande')
                   
@@ -475,7 +477,8 @@ const token = localStorage.getItem('token');
                         Swal.fire({
                     title:"Quelques chose s'est mal passé veuillez réessayer plus tard",
                     icon: 'error',
-                    confirmButtonText: 'OK'
+                    showConfirmButton: false,
+                    timer: 5000
                   });
                     }
 
@@ -483,9 +486,9 @@ const token = localStorage.getItem('token');
                 console.log(error.request);
                 Swal.fire({
   title: 'Vous avez déjà ajouter cette classe et matière',
-  
   icon: 'error',
-  confirmButtonText: 'OK'
+  showConfirmButton: false,
+    timer: 5000
 });
             }else{
                 console.log('Error'.error.message); 

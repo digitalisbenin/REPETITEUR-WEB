@@ -49,7 +49,7 @@
             <h3
               class="text-3xl font-medium text-gray-900 dark:text-white font-serif px-2"
             >
-              Mes demandes de répétiteurs
+              Mes demandes d'encadreur
             </h3>
           </div>
 
@@ -114,7 +114,7 @@
                 <th scope="col" class="px-6 py-3">Prénom</th>
                 <th scope="col" class="px-6 py-3">Classe</th>
                 <th scope="col" class="px-6 py-3">Matiere</th>
-                <th scope="col" class="px-6 py-3">Repetiteur</th>
+                <th scope="col" class="px-6 py-3">Encadreur</th>
                 <th scope="col" class="px-6 py-3">Status</th>
                 <th scope="col" class="px-6 py-3">Motif</th>
 
@@ -999,7 +999,7 @@ export default {
     async getparents() {
       setTimeout(() => {
         this.loading = false; // Set loading to false when data is fetched
-      }, 9000);
+      }, 3000);
   try {
     const token = localStorage.getItem("token");
     const config = {
@@ -1008,34 +1008,34 @@ export default {
       },
     };
 
-    const profileResponse = await axios.get("https://apirepetiteur.wadounnou.com/api/profile", config);
+    const profileResponse = await axios.get("https://www.api-mon-encadreur.com/api/profile", config);
     this.role_id = profileResponse.data.role_id;
     this.user_id = profileResponse.data.id;
 
-    const parentsResponse = await axios.get("https://apirepetiteur.wadounnou.com/api/parents");
+    const parentsResponse = await axios.get("https://www.api-mon-encadreur.com/api/parents");
     this.parents = parentsResponse.data.data.filter((parent) => parent.user.id === this.user_id);
     this.parentss_id = this.parents[0].id;
 
-    const notificationsResponse = await axios.get("https://apirepetiteur.wadounnou.com/api/notifications?user_id=" + this.user_id);
+    const notificationsResponse = await axios.get("https://www.api-mon-encadreur.com/api/notifications?user_id=" + this.user_id);
     this.notifications = notificationsResponse.data.data.filter((notificat) => notificat.status == "Non lu");
     this.Numbere = this.notifications.length;
     this.notif_id = this.notifications.map(notification => notification.id);
 
-    const enfantsResponse = await axios.get("https://apirepetiteur.wadounnou.com/api/enfants");
+    const enfantsResponse = await axios.get("https://www.api-mon-encadreur.com/api/enfants");
     this.enfantse = enfantsResponse.data.data.filter((result) => result.parents.id === this.parentss_id);
 
-    const posteResponse = await axios.get("https://apirepetiteur.wadounnou.com/api/postes");
+    const posteResponse = await axios.get("https://www.api-mon-encadreur.com/api/postes");
     this.poste = posteResponse.data.data.filter((deman) => deman.parents && deman.parents.id === this.parentss_id);
    // console.log(posteResponse);
    // console.log(this.parentss_id);
 
-    const classesResponse = await axios.get("https://apirepetiteur.wadounnou.com/api/classes");
+    const classesResponse = await axios.get("https://www.api-mon-encadreur.com/api/classes");
     this.classes = classesResponse.data.data;
 
-    const demandesResponse = await axios.get("https://apirepetiteur.wadounnou.com/api/demandes");
+    const demandesResponse = await axios.get("https://www.api-mon-encadreur.com/api/demandes");
     this.demande = demandesResponse.data.data.filter((demand) => demand.enfants.parents.id === this.parentss_id);
 
-    const matieresResponse = await axios.get("https://apirepetiteur.wadounnou.com/api/matieres");
+    const matieresResponse = await axios.get("https://www.api-mon-encadreur.com/api/matieres");
     this.matiere = matieresResponse.data.data;
 
     this.getPrix();
@@ -1046,7 +1046,7 @@ export default {
 
 
     getEnfants() {
-      axios.get("https://apirepetiteur.wadounnou.com/api/enfants").then((res) => {
+      axios.get("https://www.api-mon-encadreur.com/api/enfants").then((res) => {
         this.enfantse = res.data.data.filter(
           (result) => result.parents.id === this.parentss_id
         );
@@ -1055,7 +1055,7 @@ export default {
     },
     getDemande() {
       
-      axios.get("https://apirepetiteur.wadounnou.com/api/demandes").then((res) => {
+      axios.get("https://www.api-mon-encadreur.com/api/demandes").then((res) => {
         this.demande = res.data.data.filter(
           (demand) => demand.enfants.parents.id === this.parentss_id
         );
@@ -1064,7 +1064,7 @@ export default {
      this.getpostes();
 
       axios
-        .get("https://apirepetiteur.wadounnou.com/api/postes")
+        .get("https://www.api-mon-encadreur.com/api/postes")
         .then((res) => {
         console.log(res);
           if (res.data && res.data.data) {
@@ -1087,7 +1087,7 @@ export default {
     },
     getpostes(){
       axios
-        .get("https://apirepetiteur.wadounnou.com/api/postes")
+        .get("https://www.api-mon-encadreur.com/api/postes")
         .then((res) => {
        // console.log(res);
           if (res.data && res.data.data) {
@@ -1124,7 +1124,7 @@ export default {
       };
       //console.log(dataToSend);
       axios
-        .post("https://apirepetiteur.wadounnou.com/api/enfants", dataToSend, config)
+        .post("https://www.api-mon-encadreur.com/api/enfants", dataToSend, config)
         .then((response) => {
           // Gérer la réponse de la requête POST
           // console.log(response)
@@ -1167,7 +1167,7 @@ export default {
       // console.log(config);
       //console.log(dataToSend);
       axios
-        .post("https://apirepetiteur.wadounnou.com/api/appreciations", dataToSend, config)
+        .post("https://www.api-mon-encadreur.com/api/appreciations", dataToSend, config)
         .then((res) => {
           // console.log(res.data)
           // alert(res.data.message);
@@ -1177,7 +1177,8 @@ export default {
             Swal.fire({
                     title: "Appréciation enregistrer avec succès",
                     icon: 'success',
-                    confirmButtonText: 'OK'
+                    showConfirmButton: false,
+                    timer: 5000
                   });
              this.$router.push('/admin/demande')
              this.closeModal();
@@ -1191,7 +1192,8 @@ export default {
               Swal.fire({
                     title: "Quelques choses s'est mal passé veuillez réessayer plus tard",
                     icon: 'error',
-                    confirmButtonText: 'OK'
+                    showConfirmButton: false,
+                    timer: 5000
                   });
               mythis.errorList = error.response.data.errors;
               // console.log(error.response.data.errors);
@@ -1228,7 +1230,7 @@ export default {
 
 
         // Envoyer une requête DELETE à votre API
-        const response = await axios.delete(`https://apirepetiteur.wadounnou.com/api/demandes/${id}`,config);
+        const response = await axios.delete(`https://www.api-mon-encadreur.com/api/demandes/${id}`,config);
         
         // Vérifier la réponse de l'API
         console.log(reponse);
@@ -1247,7 +1249,7 @@ export default {
       }
     },
     getClasses() {
-      axios.get("https://apirepetiteur.wadounnou.com/api/classes").then((res) => {
+      axios.get("https://www.api-mon-encadreur.com/api/classes").then((res) => {
         this.classes = res.data.data;
         // console.log(this.classe)
       });
@@ -1255,7 +1257,7 @@ export default {
     },
 
     getMatiere() {
-      axios.get("https://apirepetiteur.wadounnou.com/api/matieres").then((res) => {
+      axios.get("https://www.api-mon-encadreur.com/api/matieres").then((res) => {
         this.matiere = res.data.data;
         // console.log(this.matiere)
       });
@@ -1263,7 +1265,7 @@ export default {
     },
     getPrix() {
       const token = localStorage.getItem("token");
-      axios.get("https://apirepetiteur.wadounnou.com/api/tarifications").then((res) => {
+      axios.get("https://www.api-mon-encadreur.com/api/tarifications").then((res) => {
         this.prixe = res.data.data.filter(
           (result) =>
             result.matiere.id === this.matiere_id &&
@@ -1291,7 +1293,7 @@ export default {
       // console.log(this.classe_id);
       // console.log(this.matricule);
 
-      axios.get("https://apirepetiteur.wadounnou.com/api/repetiteurmcs").then((res) => {
+      axios.get("https://www.api-mon-encadreur.com/api/repetiteurmcs").then((res) => {
         this.repetiteurs = res.data.data.filter(
           (result) =>
             result.matiere.id === this.matiere_id &&
@@ -1329,7 +1331,7 @@ export default {
      // console.log(this.user_id);
       // Utilisez Axios pour effectuer la requête API
       axios
-        .get(`https://apirepetiteur.wadounnou.com/api/notifications?user_id=${this.user_id}`)
+        .get(`https://www.api-mon-encadreur.com/api/notifications?user_id=${this.user_id}`)
         .then((response) => {
           // Mettez à jour les données du composant avec la réponse de l'API
           this.notifications = response.data;
@@ -1350,7 +1352,7 @@ export default {
       // console.log(config);
      // console.log(this.notif_id);
       const newStatus = "Lu";  // Remplacez 'nouveauStatut' par le statut souhaité.
-const apiUrl = 'https://apirepetiteur.wadounnou.com/api/notifications';  // Remplacez par l'URL correcte de votre API.
+const apiUrl = 'https://www.api-mon-encadreur.com/api/notifications';  // Remplacez par l'URL correcte de votre API.
 
 // Utilisez une boucle pour envoyer une requête pour chaque ID.
 this.notif_id.forEach(id => {
@@ -1399,7 +1401,7 @@ this.notif_id.forEach(id => {
       //console.log(dataToSend);
       axios
         .put(
-          "https://apirepetiteur.wadounnou.com/api/demandes/" + this.demande_id,
+          "https://www.api-mon-encadreur.com/api/demandes/" + this.demande_id,
           dataToSend,
           config
         )

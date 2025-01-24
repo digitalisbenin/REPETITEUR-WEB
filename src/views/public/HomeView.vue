@@ -1,7 +1,14 @@
 <template>
-  <div class=" flex flex-col items-center justify-start  lg:pt-2 lg:pb-2">
+  <!-- <div class=" flex flex-col items-center justify-start  lg:pt-2 lg:pb-2">
     <img src="/src/assets/images/image5.jpg" class=" object-cover h-370 w-full" />
+  </div> -->
+  <div class="flex flex-col items-center justify-start lg:pt-2 lg:pb-2">
+    <img src="/src/assets/images/image5.jpg" 
+         class="object-cover w-full h-[300px] sm:h-[500px] lg:h-[605px]" 
+         alt="Description de l'image" />
   </div>
+  
+  
   <section
     id="cardSection"
     class="overflow-hidden"
@@ -141,34 +148,14 @@
             </form> -->
 
             
-            <div class=" lg:flex space-x-4 md:flex space-x-4 sm:w-full mx-2 ">
+            <div class=" lg:flex  space-x-1 sm:w-full mx-2">
 
               
              
-              <div class="flex-1 text-start">
+              <div class="flex-4 text-start">
                 <form @submit.prevent="search">
                   <div class="">
-                    <!-- <label class="text-2xl px-1 text-start"> Commune</label> -->
-                    <!-- <input
-                      type="search"
-                      v-model="searchQueryVille"
-                      @input="searchVille"
-                      id="default-search"
-                      class="flex-grow p-4 mx-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                      placeholder=""
-                      required
-                    /> -->
-                         <!-- <div class="row-fluid">
-      <select class="selectpicker" data-show-subtext="true" data-live-search="true">
-        <option data-subtext="Rep California">Tom Foolery</option>
-        <option data-subtext="Sen California">Bill Gordon</option>
-        <option data-subtext="Sen Massacusetts">Elizabeth Warren</option>
-        <option data-subtext="Rep Alabama">Mario Flores</option>
-        <option data-subtext="Rep Alaska">Don Young</option>
-        <option data-subtext="Rep California" disabled="disabled">Marvin Martinez</option>
-      </select>
-      <span class="help-inline">With <code>data-show-subtext="true" data-live-search="true"</code>. Try searching for california</span>
-    </div>  -->
+                 
                     <select
                       v-model="searchQueryVill"
                       @input="searchVill"
@@ -191,13 +178,7 @@
               <div class="flex-1 text-start">
                 <form @submit.prevent="search">
                   <div class="">
-                    <!-- <label
-                      for="default-search"
-                      class="text-2xl px-1 text-start"
-                    >
-                      Cycle</label
-                    > -->
-                    <!-- <input type="search"   v-model="searchQueryCyle" @input="searchCycle" id="default-search" class="flex-grow p-4 mx-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=""  required> -->
+          
                     <select
                       v-model="searchQueryCyle"
                       @input="searchCycle"
@@ -396,7 +377,7 @@
     </div>
     <div class="grid gap-2 lg:grid-cols-3 mx-5">
       <div class="max-w-md p-4 bg-white rounded-lg shadow-lg">
-        <div class="flex justify-center -mt-16 md:justify-end">
+        <div class="flex justify-start -mt-20 ">
           <img
             class="object-cover w-20 h-20 border-2 border-green-500 rounded-full"
             src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
@@ -417,7 +398,7 @@
         </div>
       </div>
       <div class="max-w-md p-4 bg-white rounded-lg shadow-lg">
-        <div class="flex justify-center -mt-16 md:justify-end">
+        <div class="flex justify-start -mt-20 ">
           <img
             class="object-cover w-20 h-20 border-2 border-green-500 rounded-full"
             src="https://cdn.pixabay.com/photo/2018/01/04/21/15/young-3061652__340.jpg"
@@ -439,7 +420,7 @@
         </div>
       </div>
       <div class="max-w-md p-4 bg-white rounded-lg shadow-lg">
-        <div class="flex justify-center -mt-16 md:justify-end">
+        <div class="flex justify-start -mt-16 ">
           <img
             class="object-cover w-20 h-20 border-2 border-green-500 rounded-full"
             src="https://cdn.pixabay.com/photo/2018/01/18/17/48/purchase-3090818__340.jpg"
@@ -468,13 +449,13 @@
 
   <footer class="bg-green-600 text-white py-6">
     <div class="container mx-auto">
-      <div class="flex flex-col md:flex-row justify-between ml-12">
+      <div class="flex flex-col md:flex-row justify-between  lg:ml-12">
         <div class="md:w-1/3">
           <h2 class="text-2xl font-semibold mb-4">Contactez-nous</h2>
 
-          <p class="text-lg">Abomey-Calavi, Code Postal</p>
-          <p class="text-lg">Email : contact01.digitalis@gmail.com</p>
-          <p class="text-lg">Téléphone : +229 97825820</p>
+          <p class="text-lg">Adresses: Abomey-Calavi / Togoudo</p>
+          <p class="text-lg">Email : info@mon-encadreur.com</p>
+          <p class="text-lg">Téléphones :0197825820 / 0194863786</p>
         </div>
 
         <div class="md:w-1/3 mt-4 md:mt-0">
@@ -483,7 +464,7 @@
             <li><a href="/" class="hover:text-gray-400 text-lg">Accueil</a></li>
             <li>
               <a href="/#repetiteur" class="hover:text-gray-400 text-lg"
-                >Rechercher un répétiteur</a
+                >Rechercher un encadreur</a
               >
             </li>
             <li>
@@ -563,7 +544,7 @@
           </ul>
           <h2 class="text-xl font-semibold mt-2">Notre site</h2>
           <a
-            href="https://digitalis-benin.com/"
+            href="https://digitalis.wadounnou.com/"
             target="blank"
             class="text-white hover:text-gray-400 text-lg"
             >digitalis-benin.com</a
@@ -696,7 +677,7 @@ export default {
   async created() {
     try {
       const response = await axios.get(
-        "https://apirepetiteur.wadounnou.com/api/repetiteurs"
+        "https://www.api-mon-encadreur.com/api/repetiteurs"
       ); // Remplacez par votre URL d'API
       this.apiData = response.data; // Assurez-vous que la structure de votre réponse correspond à ce que vous attendez
       // console.log( this.apiData.data);
@@ -772,7 +753,7 @@ this.apeResults = this.autresResults.slice(
   methods: {
     //  getMatiereFiltre() {
     //   axios
-    //     .get("https://apirepetiteur.wadounnou.com/api/communes")
+    //     .get("https://www.api-mon-encadreur.com/api/communes")
     //     .then((res) => {
     //       this.commune = res.data.data;
     //       // console.log(this.commune)
@@ -780,13 +761,13 @@ this.apeResults = this.autresResults.slice(
     // },
      getRepetitieursFiltre() {
       axios
-        .get("https://apirepetiteur.wadounnou.com/api/repetiteurs")
+        .get("https://www.api-mon-encadreur.com/api/repetiteurs")
         .then((res) => {
           
          this.itemse= res.data.data.filter(
         (results) => results.traitementDossiers === "Validé"
       );
-           console.log(this.items)
+        //   console.log(this.items)
         });
     },
     toggleBlink() {
@@ -794,7 +775,7 @@ this.apeResults = this.autresResults.slice(
     },
     getCommune() {
       axios
-        .get("https://apirepetiteur.wadounnou.com/api/communes")
+        .get("https://www.api-mon-encadreur.com/api/communes")
         .then((res) => {
           this.commune = res.data.data;
           // console.log(this.commune)
@@ -802,7 +783,7 @@ this.apeResults = this.autresResults.slice(
     },
     getPublicité() {
       axios
-        .get("https://apirepetiteur.wadounnou.com/api/publicites")
+        .get("https://www.api-mon-encadreur.com/api/publicites")
         .then((response) => {
           this.publicite = response.data.data;
           //console.log( this.publicite);
@@ -816,7 +797,7 @@ this.apeResults = this.autresResults.slice(
     },
     getmatiere() {
       axios
-        .get("https://apirepetiteur.wadounnou.com/api/matieres")
+        .get("https://www.api-mon-encadreur.com/api/matieres")
         .then((response) => {
           this.matiere = response.data.data;
           // console.log( this.matiere);
@@ -858,7 +839,7 @@ this.apeResults = this.autresResults.slice(
     async getrepetiteur() {
       try {
         const response = await axios.get(
-          "https://apirepetiteur.wadounnou.com/api/repetiteurs"
+          "https://www.api-mon-encadreur.com/api/repetiteurs"
         );
         if (response.data) {
           this.repetiteur = response.data.data;
@@ -871,7 +852,7 @@ this.apeResults = this.autresResults.slice(
     async getrepetiteurMatiere() {
       try {
         const response = await axios.get(
-          "https://apirepetiteur.wadounnou.com/api/repetiteurmcs "
+          "https://www.api-mon-encadreur.com/api/repetiteurmcs "
         );
         if (response.data) {
           this.repetiteurmatiereClasse = response.data.data;
@@ -885,7 +866,7 @@ this.apeResults = this.autresResults.slice(
       
       // Filtrer les répétiteurs en fonction des critères de recherche
       let filteredRepetiteurs = this.items;
-      console.log(this.items);
+      //console.log(this.items);
 
       if (this.searchQueryVille) {
         this.searchResults = filteredRepetiteurs.filter(repetiteur => repetiteur.ville === this.searchQueryVille);
@@ -907,7 +888,7 @@ this.apeResults = this.autresResults.slice(
       try {
         // Utilisez Axios pour effectuer la requête à l'API
         axios
-          .get("https://apirepetiteur.wadounnou.com/api/repetiteurs")
+          .get("https://www.api-mon-encadreur.com/api/repetiteurs")
           .then((res) => {
             this.searchResults = res.data.data.filter(
               (result) =>
@@ -935,7 +916,7 @@ this.apeResults = this.autresResults.slice(
       //console.log('Recherche effectuée avec :', this.searchQueryVille);
       try {
         axios
-          .get("https://apirepetiteur.wadounnou.com/api/repetiteurs")
+          .get("https://www.api-mon-encadreur.com/api/repetiteurs")
           .then((res) => {
             this.commune1 = res.data.data.filter(
               (result) =>
@@ -956,12 +937,12 @@ this.apeResults = this.autresResults.slice(
       }
     },
     searchVill() {
-      console.log(this.itemse);
-      console.log('Recherche effectuée avec :', this.searchQueryVill);
+      //console.log(this.itemse);
+     // console.log('Recherche effectuée avec :', this.searchQueryVill);
       
       try {
         axios
-          .get("https://apirepetiteur.wadounnou.com/api/repetiteurs")
+          .get("https://www.api-mon-encadreur.com/api/repetiteurs")
           .then((res) => {
             this.commune2 = res.data.data.filter(
               (result) =>
@@ -981,10 +962,10 @@ this.apeResults = this.autresResults.slice(
       }
     },
     searchCycle() {
-       console.log('Recherche effectuée avec :', this.searchQueryCyle);
+      // console.log('Recherche effectuée avec :', this.searchQueryCyle);
       try {
         axios
-          .get("https://apirepetiteur.wadounnou.com/api/repetiteurs")
+          .get("https://www.api-mon-encadreur.com/api/repetiteurs")
           .then((res) => {
             this.items = res.data.data.filter(
               (result) =>
@@ -1038,7 +1019,7 @@ if (this.commune2.length > 0) {
       
       // try {
       //   axios
-      //     .get("https://apirepetiteur.wadounnou.com/api/repetiteurs")
+      //     .get("https://www.api-mon-encadreur.com/api/repetiteurs")
       //     .then((res) => {
       //       this.searchResults = res.data.data.filter(
       //         (result) =>
@@ -1061,7 +1042,7 @@ if (this.commune2.length > 0) {
       try {
         // Utilisez Axios pour effectuer la requête à l'API
         axios
-          .get("https://apirepetiteur.wadounnou.com/api/repetiteurmcs")
+          .get("https://www.api-mon-encadreur.com/api/repetiteurmcs")
           .then((response) => {
             console.log("Réponse de l'API:", response.data.data);
             //   this.searchResults = response.data.data.filter(result =>

@@ -40,7 +40,7 @@
                         Date
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Appréciation sur le répétiteur
+                        Appréciation sur l'encadreur
                     </th>
                     <!-- <th scope="col" class="px-6 py-3">
                         Parents
@@ -321,7 +321,7 @@
       //console.log(config);
 
       // Requête pour récupérer le profil
-      const profileResponse  = await axios.get('https://apirepetiteur.wadounnou.com/api/profile', config);
+      const profileResponse  = await axios.get('https://www.api-mon-encadreur.com/api/profile', config);
         //console.log(profileResponse);
       // Stocker les données du profil dans le composant ou Vuex
       this.role_id = profileResponse.data.role_id;
@@ -332,31 +332,32 @@
    
 
     //         });
-            axios.get("https://apirepetiteur.wadounnou.com/api/parents").then((res) => {
+            axios.get("https://www.api-mon-encadreur.com/api/parents").then((res) => {
         this.parents = res.data.data.filter(
           (parent) => parent.user.id === this.user_id
         );
 
        // console.log(this.parents);
         this.parentss_id = this.parents[0].id;
-        console.log(this.parentss_id);
+        //console.log(this.parentss_id);
       });
             this.getEnfants();
   },
        async getEnfants(studentId){
         setTimeout(() => {
         this.loading = false; // Set loading to false when data is fetched
-      }, 7000);
+      }, 3000);
             const repetiteur_id = localStorage.getItem('repetiteur_id');
            // console.log(repetiteur_id);
            // console.log(studentId)
            // console.log(this.repetiteurs_id);
-           await axios.get('https://apirepetiteur.wadounnou.com/api/appreciations').then(res=>{
-            console.log(res.data.data)
-                this.enfants=res.data.data.filter(enfant => enfant.parents.id === this.parentss_id);
-                console.log(this.enfants)
-                console.log(res.data.data)
-                console.log(this.parentss_id)
+           await axios.get('https://www.api-mon-encadreur.com/api/appreciations?user_id='+this.user_id).then(res=>{
+            //console.log(res.data.data)
+                // this.enfants=res.data.data.filter(enfant => enfant.parents.id === this.parentss_id);
+                this.enfants=res.data.data;
+               // console.log(this.enfants)
+                //console.log(res.data.data)
+                //console.log(this.parentss_id)
             });
            // console.log(enfants);
         },

@@ -96,7 +96,7 @@
         </div>
       </div>
   </div> -->
-  <div class=" mx-10">
+  <div class="">
     <table class="w-full table-responsive text-sm text-left text-gray-500">
         <thead class="text-xl text-gray-700 uppercase bg-gray-100">
             <tr>
@@ -222,7 +222,7 @@
     </tr>
 </thead>
 
-<tr class="bg-white text-lg border-b ">
+<!-- <tr class="bg-white text-lg border-b ">
   <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
     Ecole de provenence
   </th>
@@ -230,7 +230,7 @@
     {{ product.data.ecole }}
   </td>
   
-</tr>
+</tr> -->
 <tr class="bg-white text-lg border-b ">
   <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
     Cycle
@@ -242,7 +242,7 @@
 </tr>
 <tr class="bg-white text-lg border-b ">
   <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-    Grade
+    Statut de l'encadreur
   </th>
   <td class="px-6 py-4">
     {{ product.data.grade }}
@@ -296,7 +296,7 @@
                               </div>
                                             <br>
                                            
-                                           <a href="#" @click="redirect" class="text-white bg-green-600 hover:bg-green-400 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 me-2 mb-2  focus:outline-none " type="button">  Faire la demande de répétiteur</a>
+                                           <a href="#" @click="redirect" class="text-white bg-green-600 hover:bg-green-400 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 me-2 mb-2  focus:outline-none " type="button">  Faire la demande d'encadreur</a>
     </div>
 </div>
 </div>
@@ -317,14 +317,14 @@
 
 <footer class="bg-green-600 text-white py-6">
   <div class="container mx-auto">
-    <div class="flex flex-col md:flex-row justify-between ml-12">
+    <div class="flex flex-col md:flex-row justify-between lg:ml-12">
       
       <div class="md:w-1/3">
         <h2 class="text-2xl font-semibold mb-4">Contactez-nous</h2>
         
-        <p class="text-lg">Abomey-Calavi, Code Postal</p>
-        <p class="text-lg">Email : contact01.digitalis@gmail.com</p>
-        <p class="text-lg">Téléphone : +229 97825820</p>
+        <p class="text-lg">Adresses: Abomey-Calavi / Togoudo</p>
+        <p class="text-lg">Email : info@mon-encadreur.com</p>
+        <p class="text-lg">Téléphones :0197825820 / 0194863786</p>
       </div>
 
       
@@ -332,7 +332,7 @@
         <h2 class="text-2xl font-semibold mb-4">Liens rapides</h2>
         <ul>
           <li><a href="/" class="hover:text-gray-400 text-lg ">Accueil</a></li>
-          <li><a href="/#repetiteur" class="hover:text-gray-400 text-lg">Rechercher un répétiteur</a></li>
+          <li><a href="/#repetiteur" class="hover:text-gray-400 text-lg">Rechercher un encadreur</a></li>
           <li><a href="/login" class="hover:text-gray-400 text-lg">Faire une demande</a></li>
           <li><a href="/login" class="hover:text-gray-400 text-lg">Connexion</a></li>
         </ul>
@@ -366,6 +366,7 @@
 <script>
 import axios from 'axios'
 import Teamwork from '/src/assets/images/vectoriel.jpg';
+import encadreur from '../../../assets/encadreur.png';
 export default {
     name:'details',
     setup: () => {
@@ -397,9 +398,9 @@ export default {
 
   methods: {
     getProductDetails(productId) {
-        console.log(productId)
+        // console.log(productId)
         this.proId=productId
-            axios.get('https://apirepetiteur.wadounnou.com/api/repetiteurs/'+productId)
+            axios.get('https://www.api-mon-encadreur.com/api/repetiteurs/'+productId)
             .then(res=>{
                 //console.log(res.data);
                 this.product= res.data;
@@ -410,7 +411,7 @@ export default {
                     }
                 }
             });
-            axios.get('https://apirepetiteur.wadounnou.com/api/repetiteurmcs')
+            axios.get('https://www.api-mon-encadreur.com/api/repetiteurmcs')
             .then(res=>{
                // console.log(res.data);
                 this.products= res.data.data.filter(repetiteur => repetiteur.repetiteur.id === productId);
@@ -441,7 +442,7 @@ export default {
       //console.log(config);
 
       const profileResponse = await axios.get(
-        "https://apirepetiteur.wadounnou.com/api/profile",
+        "https://www.api-mon-encadreur.com/api/profile",
         config
       );
      // console.log(profileResponse);
@@ -451,7 +452,7 @@ export default {
       // console.log(this.role_id);
       // console.log(this.user_id);
 
-      axios.get("https://apirepetiteur.wadounnou.com/api/parents").then((res) => {
+      axios.get("https://www.api-mon-encadreur.com/api/parents").then((res) => {
         this.parents = res.data.data.filter(
           (parent) => parent.user.id === this.user_id
         );
@@ -461,7 +462,7 @@ export default {
         // console.log(this.parentss_id);
       });
 
-      axios.get("https://apirepetiteur.wadounnou.com/api/evaluations").then((res) => {
+      axios.get("https://www.api-mon-encadreur.com/api/evaluations").then((res) => {
         this.evaluations = res.data.data.filter(parent =>parent.user.id == this.user_id
         );
 
@@ -507,21 +508,33 @@ export default {
                       user_id: this.user_id,
                     };
                     try {
-          const Response = await axios.post('https://apirepetiteur.wadounnou.com/api/evaluations', userData, config);
+          const Response = await axios.post('https://www.api-mon-encadreur.com/api/evaluations', userData, config);
          // console.log('evaluation Response:', Response);
           if (Response.status === 201) {
-            alert('Le compte de ce  répétiteur à été bien évaluation');
+           // alert('Le compte de ce  répétiteur à été bien évaluation');
+            Swal.fire({
+            title: 'Le compte de ce  répétiteur à été bien évaluation',
+            icon: 'success',
+                        showConfirmButton: false,
+            timer: 5000
+          });
           }
         } catch (Error) {
           console.error('Erreur lors de la mise en évaluationde votre compte :', Error);
-          alert('Ce répétiteur à été déja évaluer');
+          //alert('Ce répétiteur à été déja évaluer');
+          Swal.fire({
+            title: 'Ce répétiteur à été déja évaluer',
+            icon: 'error',
+                        showConfirmButton: false,
+            timer: 5000
+          });
         }
         
       }
     },
     redirect(){
       this.tokene = localStorage.getItem("token");
-      console.log(this.proId);
+      // console.log(this.proId);
       if (this.tokene && this.parentss_id) {
         this.$router.push({ name: 'demandecreate', params: { repetiteurId: this.proId } });
         //this.$router.push('/admin/demande/create');

@@ -224,7 +224,7 @@
       //console.log(config);
 
       // Requête pour récupérer le profil
-      const profileResponse  = await axios.get('https://apirepetiteur.wadounnou.com/api/profile', config);
+      const profileResponse  = await axios.get('https://www.api-mon-encadreur.com/api/profile', config);
         //console.log(profileResponse);
       // Stocker les données du profil dans le composant ou Vuex
       this.role_id = profileResponse.data.role_id;
@@ -232,7 +232,7 @@
       //console.log(this.role_id);
       //console.log(this.user_id);
 
-    axios.get('https://apirepetiteur.wadounnou.com/api/repetiteurs').then(res=>{
+    axios.get('https://www.api-mon-encadreur.com/api/repetiteurs').then(res=>{
                 this.repetiteurs = res.data.data.filter(repetiteur => repetiteur.user.id === this.user_id)
                   
                 //console.log(this.repetiteurs)
@@ -252,7 +252,7 @@
            // console.log(repetiteur_id);
            // console.log(studentId)
            // console.log(this.repetiteurs_id);
-           await axios.get('https://apirepetiteur.wadounnou.com/api/presenceaupostes').then(res=>{
+           await axios.get('https://www.api-mon-encadreur.com/api/presenceaupostes').then(res=>{
                 this.enfants=res.data.data.filter(enfant => enfant.repetiteur.id === this.repetiteurs_id);
                // console.log(this.enfants)
              //   console.log(res.data.data)
@@ -281,11 +281,11 @@ const token = localStorage.getItem('token');
        'Authorization': 'Bearer ' + token // Bearer 14|LhMjIdjCKZjxzEeSHNOOE0eQUUCM28lHQ6JbW1pOb16e3fa8 // Remplacez par le token d'authentification réel
      }
            };
-           console.log(config);
-console.log(dataToSend);
-            axios.put( "https://apirepetiteur.wadounnou.com/api/presenceaupostes/"+ this.selectedEnfant,dataToSend,config ).then(res =>{
+//            console.log(config);
+// console.log(dataToSend);
+            axios.put( "https://www.api-mon-encadreur.com/api/presenceaupostes/"+ this.selectedEnfant,dataToSend,config ).then(res =>{
 
-                console.log(res.data)
+               // console.log(res.data)
                 //alert(res.data.message);
                this.closeModal();
             //    this.$router.push('/admin/presence')
@@ -297,9 +297,10 @@ console.log(dataToSend);
                    
                     //alert('Appréciation enregister avec succès')
                     Swal.fire({
-                    title:"Appréciation enregister avec succès",
+                    title:"Presence au poste enregister avec succès",
                     icon: 'success',
-                    confirmButtonText: 'OK'
+                    showConfirmButton: false,
+                    timer: 5000
                   });
                     this.$router.push('/admin/dashboard')
                   
@@ -321,10 +322,11 @@ console.log(dataToSend);
                         Swal.fire({
                     title:"Quelques chose s'est mal passé veuillez réessayer plus tard",
                     icon: 'error',
-                    confirmButtonText: 'OK'
+                    showConfirmButton: false,
+                    timer: 5000
                   });
-                        mythis.errorList=error.response.data.errors;
-                        console.log(error.response.data.errors);
+                        // mythis.errorList=error.response.data.errors;
+                        // console.log(error.response.data.errors);
                     }
 
             } else if (error.request){

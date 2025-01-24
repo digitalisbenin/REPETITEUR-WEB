@@ -9,13 +9,13 @@
                    
                     
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <h3 class="text-xl font-bold px-3">Liste des Répétiteurs</h3><br>
+    <h3 class="text-xl font-bold px-3">Liste des Encadreurs</h3><br>
      <div class="flex justify-end">
         <button  type="button" class="inline-flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
             <!-- <svg class="w-[14px] h-[14px] text-white dark:text-white mt-1 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 1v16M1 9h16" />
         </svg> -->
-        <RouterLink to="/admin/repetiteur/create">Postuler pour être répétiteur</RouterLink>
+        <RouterLink to="/admin/repetiteur/create">Postuler pour être encadreur</RouterLink>
         </button>
     </div> 
     <table class="w-full table-auto text-sm text-left text-gray-500 dark:text-gray-400">
@@ -111,7 +111,7 @@
     },
     methods :{
         getRepetiteur(){
-            axios.get('https://apirepetiteur.wadounnou.com/api/repetiteurs').then(res=>{
+            axios.get('https://www.api-mon-encadreur.com/api/repetiteurs').then(res=>{
                 this.repetiteurs=res.data.data
                // console.log(this.repetiteurs)
                 //console.log(res)

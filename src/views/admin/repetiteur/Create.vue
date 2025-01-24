@@ -2,7 +2,7 @@
 <template>
     
 <div class="container w-full mx-auto my-auto" enctype="multipart/form-data">
-  <h3 class="text-3xl font-medium text-gray-900 dark:text-white text-center mt-4 mb-8 font-serif">Formulaire d'inscription pour un Répétiteur</h3>
+  <h3 class="text-3xl font-medium text-gray-900  text-center mt-4 mb-8 font-serif">Formulaire d'inscription pour un Encadreur</h3>
     <div class="w-full max px-4 bg-white border border-gray-200 rounded-lg shadow sm:p-12 md:p-12 dark:bg-gray-800 dark:border-gray-700">
         <form class="space-y-6" action="Post"  @submit.prevent="saveRepetiteur" enctype="multipart/form-data">
             <ul class="bg-blue-100 border-t border-border-blue-500 text-blue-700 px-4 py-3" role="alert" v-if="Object.keys(this.errorList).length > 0">
@@ -13,35 +13,63 @@
             </ul>
             
 
-           <div class="grid gap-6 mb-6 md:grid-cols-4">
-
-          <!-- <div class="flex-1">
-              <label for="classe" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Classe</label>
-              <input type="text" name="classe" v-model="model.classe" id="classe" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="La où les classe(s) que vous enseignez" required>
-          </div> -->
+           <div class="grid gap-6 mb-6 md:grid-cols-3">
+            <div class="flex-1">
+              <label for="adresse" class="block mb-2 text-2xl font-medium text-gray-900 "> Adresse<span class="text-red-500">*</span></label>
+              <input type="text" name="adresse"  v-model="model.adresse" id="adresse" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="" required>
+          </div>
           <div class="flex-1">
-            <label for="phone" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">Téléphone</label>
-            <input type="number"  v-model="model.phone" name="phone" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Entrer votre numéro" required>
+            <label for="dateLieuNaissance" class="block mb-2 text-2xl font-medium text-gray-900 ">Age<span class="text-red-500">*</span></label>
+            <input type="text" name="dateLieuNaissance"  v-model="model.dateLieuNaissance" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="" required>
         </div>
+          <!-- <div class="flex-1">
+              <label for="classe" class="block mb-2 text-lg font-medium text-gray-900 ">Classe</label>
+              <input type="text" name="classe" v-model="model.classe" id="classe" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="La où les classe(s) que vous enseignez" required>
+          </div> -->
+          <!-- <div class="flex-1">
+            <label for="phone" class="block mb-2 text-2xl font-medium text-gray-900 ">Téléphone</label>
+            <input type="number"  v-model="model.phone" name="phone" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="Entrer votre numéro" required>
+        </div> -->
         <div class="flex-1">
-          <label for="countries" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">Commune</label>
-          <select id="countries" v-model="model.commune" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+          <label for="countries" class="block mb-2 text-2xl font-medium text-gray-900 ">Commune<span class="text-red-500">*</span></label>
+          <select id="countries" v-model="model.commune" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
            <option value="" >Selectionner votre Commune</option>
            <option v-for="fruit in commune" :key="fruit.id" :value="fruit.id">{{ fruit.name }}</option>
           </select>
   
          </div > 
-        <div class="flex-1">
-          <label for="adresse" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">Détails Adresse</label>
-          <input type="text" name="adresse"  v-model="model.adresse" id="adresse" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="" required>
-      </div>
+        
       <div class="flex-1">
-        <label for="countries" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">Cycle</label>
-        <select id="countries" v-model="model.cycle" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+        <label for="countries" class="block mb-2 text-2xl font-medium text-gray-900 ">Cycle pour l'encadrement<span class="text-red-500">*</span></label>
+        <select id="countries" v-model="model.cycle" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
          <option value="" >Selectionner votre cycle</option>
         <option value="Primaires" required>Primaires</option>
         <option value="Secondaires">Secondaires</option>
         <option value="Universitaires">Universitaires</option>
+        </select>
+
+       </div > 
+       <div class="flex-1">
+        <label for="countries" class="block mb-2 text-2xl font-medium text-gray-900 ">Sexe<span class="text-red-500">*</span></label>
+        <select id="countries" v-model="model.sexe" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+         <option value="" >Selectionner votre sexe</option>
+        <option value="Homme" required>Homme</option>
+        <option value="Femme">Femme</option>
+        </select>
+
+       </div > 
+
+       <div class="flex-1">
+        <label for="countries" class="block mb-2 text-2xl font-medium text-gray-900 ">Niveau d'étude<span class="text-red-500">*</span></label>
+        <select id="countries" v-model="model.niveauEtude" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+         <option value="" >Selectionner votre niveau d'etude</option>
+        <option value="BEPC" required>BEPC</option>
+        <option value="BAC">BAC</option>
+        <option value="BTS">BTS</option>
+        <option value="Licence">Licence</option>
+        <option value="Master/DEA">Master/DEA</option>
+        <option value="Doctorat">Doctorat</option>
+        
         </select>
 
        </div > 
@@ -50,9 +78,9 @@
 
    
             <!-- <div>
-                <label for="grade" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Grade</label>
+                <label for="grade" class="block mb-2 text-sm font-medium text-gray-900 ">Grade</label>
               
-                <select id="countries" v-model="model.grade" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                <select id="countries" v-model="model.grade" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                    <option selected >Choisir votre sexe</option> -->
                   <!-- <option value="Permanent" required>Permanent</option>
                   <option value="Vacataire">Vacataire</option>
@@ -61,8 +89,8 @@
             <!-- </div> --> 
           <!-- <div class="flex space-x-4"> -->
             <!-- <div class="flex-1">
-              <label for="countries" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Matières</label>
-              <select id="countries" v-model="model.matiere_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+              <label for="countries" class="block mb-2 text-lg font-medium text-gray-900 ">Matières</label>
+              <select id="countries" v-model="model.matiere_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
               <option selected  >Choisir vos matières</option>
   
               <option v-for="(matier,index) in this.matiere" :key="index" :value="matier.id" >{{ matier.name }}</option>
@@ -72,93 +100,94 @@
               
             
           <!-- </div> -->
-          <div class="grid gap-6 mb-6 md:grid-cols-2">
+          <div class="grid gap-6 mb-6 md:grid-cols-3">
             <div class="flex-1">
-              <label class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white" for="large_size">Photo de profil</label>
+              <label class="block mb-2 text-2xl font-medium text-gray-900 " for="large_size">Photo de profil</label>
               <input ref="profil_imageUrl" @change="onFileChange"  class="block w-full text-xl text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="large_size" type="file">
+
+            </div>
+            <div class="flex-1">
+              <label class="block mb-2  text-2xl font-medium text-gray-900 " for="large_size">Pièces d'identité en format pdf<span class="text-red-500">*</span></label>
+              <input type="file"  @change="identites" accept=".pdf"  class="block w-full  text-xl text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="large_size" >
 
             </div>
           
             <div class="flex-1">
-              <label class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white" for="large_size">Importer votre diplome en format pdf</label>
+              <label class="block mb-2 text-2xl font-medium text-gray-900 " for="large_size">Diplome en format pdf<span class="text-red-500">*</span></label>
               <input type="file"  @change="handleFileUpload" accept=".pdf"  class="block w-full  text-xl text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="large_size" >
 
             </div>
               
             
           </div>
-          <div class="grid gap-6 mb-6 md:grid-cols-2">
+          <!-- <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div class="flex-1">
-              <label class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white" for="large_size">Importer votre casier judiciaire en format pdf</label>
+              <label class="block mb-2 text-2xl font-medium text-gray-900 " for="large_size">Importer votre casier judiciaire en format pdf</label>
               <input type="file"  @change="casierJudicaires" accept=".pdf"  class="block w-full  text-xl text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="large_size" >
             </div>  
             
           <div class="flex-1">
-          <label class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white" for="large_size">Importer l'attestation de résidence en format pdf</label>
+          <label class="block mb-2 text-2xl font-medium text-gray-900 " for="large_size">Importer l'attestation de résidence en format pdf</label>
           <input type="file"  @change="attestationResidences" accept=".pdf"  class="block w-full  text-xl text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="large_size" >
 
           </div>
-          </div>
-          <div class="grid gap-6 mb-6 md:grid-cols-2">
-           
-            <div class="flex-1">
-              <label class="block mb-2  text-2xl font-medium text-gray-900 dark:text-white" for="large_size">Importer votre pièces d'identité en format pdf</label>
-              <input type="file"  @change="identites" accept=".pdf"  class="block w-full  text-xl text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="large_size" >
-
-            </div>
-            <div class="flex-1">
-              <label for="description" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">Description</label>
-              <input type="text" name="description"  v-model="model.description" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder=" Un description de sois pour attirer les parents" required>
-          </div>
-          </div>
-          
-          <div class="grid gap-6 mb-6 md:grid-cols-2">
-           
+          </div> -->
          
-            <div class="flex-1">
-                <label for="ecole" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">Ecole</label>
-                <input type="text" name="ecole"  v-model="model.ecole" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Entrer l'ecole ou vous enseignez" required>
-            </div>
-            <div class="flex-1">
-              <label for="heureDisponibilite" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">Heure de Disponibilité</label>
-              <input type="text" name="heureDisponibilite"  v-model="model.heureDisponibilite" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder=" EX: Mercredi 14h à 18 et Samedi 14h à 18h" required>
-          </div>
-             </div>
+          
+         
              <div class="grid gap-6 mb-6 md:grid-cols-3">
               <div class="flex-1">
-                <label for="grade" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">Grade</label>
-                <input type="text" name="grade"  v-model="model.grade" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Entrer votre grade" required>
+                <label for="grade" class="block mb-2 text-2xl font-medium text-gray-900 ">Statut<span class="text-red-500">*</span></label>
+               
+                <select id="countries" v-model="model.grade" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required>
+                  <option value="" >Selectionner votre statut</option>
+                 <option value="Etudiant" required>Etudiant</option>
+                 <option value="Enseignant">Enseignant</option>
+                 <option value="Autre professionnel">Autre professionnel</option>
+                 </select>
             </div>
            
-          <div class="flex-1">
-            <label for="dateLieuNaissance" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">Date et lieu de naissance</label>
-            <input type="text" name="dateLieuNaissance"  v-model="model.dateLieuNaissance" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder=" EX: 20/10/1990/Cotonou" required>
-        </div>
+        
         <div class="flex-1">
-          <label for="situationMatrimoniale" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">Situation matrimoniale</label>
-          <input type="text" name="situationMatrimoniale"  v-model="model.situationMatrimoniale" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Entrer votre situation matrimoniale" required>
+          <label for="situationMatrimoniale" class="block mb-2 text-2xl font-medium text-gray-900 ">Situation matrimoniale<span class="text-red-500">*</span></label>
+         
+          <select id="countries" v-model="model.situationMatrimoniale" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required>
+            <option value="" >Selectionner votre situation</option>
+           <option value="Célibataire" required>Célibataire</option>
+           <option value="Marié">Marié</option>
+           <option value="Autre">Autre</option>
+           </select>
       </div>
+
+      <div class="flex-1">
+        <label for="experience" class="block mb-2 text-2xl font-medium text-gray-900 ">Expérience<span class="text-red-500">*</span></label>
+       
+        <select id="countries" v-model="model.experience" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required>
+          <option value="" >Selectionner votre expérience</option>
+         <option value="Débutant" required>Débutant</option>
+         <option value="2ans d'expérience">2ans d'expérience</option>
+         <option value="2ans à 5ans d'expérience">2ans à 5ans d'expérience</option>
+         <option value="Plus de 5ans d'expérience">Plus de 5ans d'expérience</option>
+         </select>
+    </div>
              </div>
-              <div class="grid gap-6 mb-6 md:grid-cols-3">
-                <div class="flex-1">
-                  <label for="ecole" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">Niveau d'etude</label>
-                  <input type="text" name="ecole"  v-model="model.niveauEtude" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Entrer votre niveau d'etude" required>
-              </div>
              
-            <div class="flex-1">
-              <label for="countries" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">Sexe</label>
-              <select id="countries" v-model="model.sexe" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-               <option value="" >Selectionner votre sexe</option>
-              <option value="Homme" required>Homme</option>
-              <option value="Femme">Femme</option>
-              </select>
-  
-             </div > 
-             <div class="flex-1">
-              <label for="experience" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">Expérience</label>
-              <input type="text"  v-model="model.experience" name="experience" id="experience" placeholder="Entrer votre expérience professionnel" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
-          </div>
+              <div class="grid gap-6 mb-6 md:grid-cols-2">
+           
+         
+                <!-- <div class="flex-1">
+                    <label for="ecole" class="block mb-2 text-2xl font-medium text-gray-900 ">Ecole</label>
+                    <input type="text" name="ecole"  v-model="model.ecole" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="Entrer l'ecole ou vous enseignez" required>
+                </div> -->
+                <div class="flex-1">
+                  <label for="heureDisponibilite" class="block mb-2 text-2xl font-medium text-gray-900 ">Heure de Disponibilité<span class="text-red-500">*</span></label>
+                  <input type="text" name="heureDisponibilite"  v-model="model.heureDisponibilite" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder=" EX: Mercredi 14h à 18 et Samedi 14h à 18h" required>
               </div>
+              <div class="flex-1">
+                <label for="description" class="block mb-2 text-2xl font-medium text-gray-900 ">Description<span class="text-red-500">*</span></label>
+                <input type="text" name="description"  v-model="model.description" id="ecole" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder=" Un description de sois pour attirer les parents" required>
+            </div>
+                 </div>
           
            
             <div class="flex justify-end">
@@ -228,7 +257,7 @@ export default {
     },
     methods:{
       getCommune(){
-        axios.get('https://apirepetiteur.wadounnou.com/api/communes').then(res=>{
+        axios.get('https://www.api-mon-encadreur.com/api/communes').then(res=>{
                 this.commune=res.data.data
                 console.log(this.commune)
                
@@ -236,7 +265,7 @@ export default {
 
       },
       getAdmin(){
-    axios.get('https://apirepetiteur.wadounnou.com/api/users').then(res=>{
+    axios.get('https://www.api-mon-encadreur.com/api/users').then(res=>{
                 this.admin = res.data.data.filter(result =>
                    result.name === 'Supper Admin'
 
@@ -250,7 +279,7 @@ export default {
             });
 },
       getMatiere(){
-            axios.get('https://apirepetiteur.wadounnou.com/api/repetiteurs').then(res=>{
+            axios.get('https://www.api-mon-encadreur.com/api/repetiteurs').then(res=>{
                 this.matiere=res.data.data
                 this.longueur=res.data.data.length + 1
                // console.log(this.matiere)
@@ -270,7 +299,7 @@ export default {
       }
             };
            // console.log(config);
-     axios.get('https://apirepetiteur.wadounnou.com/api/profile',config)
+     axios.get('https://www.api-mon-encadreur.com/api/profile',config)
     .then(response => {
       this.user_id = response.data.id;
       localStorage.setItem('user_id',response.data.id)
@@ -327,7 +356,7 @@ export default {
       formData.append("file", this.image);
 
       axios
-        .post("https://apirepetiteur.wadounnou.com/api/medias", formData, {
+        .post("https://www.api-mon-encadreur.com/api/medias", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -354,7 +383,7 @@ export default {
       console.log(this.pdf);
 
       axios
-        .post("https://apirepetiteur.wadounnou.com/api/medias", formData, {
+        .post("https://www.api-mon-encadreur.com/api/medias", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -381,7 +410,7 @@ export default {
       //console.log(this.pdfidentite);
 
       axios
-        .post("https://apirepetiteur.wadounnou.com/api/medias", formData, {
+        .post("https://www.api-mon-encadreur.com/api/medias", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -407,7 +436,7 @@ export default {
       //console.log(this.pdfcasierJudicaires);
 
       axios
-        .post("https://apirepetiteur.wadounnou.com/api/medias", formData, {
+        .post("https://www.api-mon-encadreur.com/api/medias", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -433,7 +462,7 @@ export default {
       //console.log(this.pdfattestationResidence);
 
       axios
-        .post("https://apirepetiteur.wadounnou.com/api/medias", formData, {
+        .post("https://www.api-mon-encadreur.com/api/medias", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -493,7 +522,7 @@ const config={
       }
             };
 //console.log(dataToSend);
-            axios.post('https://apirepetiteur.wadounnou.com/api/repetiteurs', dataToSend,config )
+            axios.post('https://www.api-mon-encadreur.com/api/repetiteurs', dataToSend,config )
 .then(response => {
   
   //console.log(response)
@@ -505,32 +534,38 @@ const config={
                 mythis.errorList=response.data.message
              //   alert(response.data.message);
                 if (response.status==201) {
-                    mythis.errorList="Compte répétiteurs créer avec succès"
+                    //mythis.errorList="Compte répétiteurs créer avec succès"
                     //alert('Formulaire du répétiteurs remplir avec succès')
                     Swal.fire({
-                    title: 'Formulaire de répétiteurs remplir avec succès',
+                    title: 'Formulaire d\'encadreur remplir avec succès',
                     icon: 'success',
-                    confirmButtonText: 'OK'
+                    showConfirmButton: false,
+                    timer: 5000
                   });
                     const userData = { 
                       repetiteur_id: this.repetiteur_id,
                       type: "repetiteur",
                       user_id: this.admin_id,
-                      message: "Nouveau répétiteur",
+                      message: "Nouveau encadreur",
                     };
                     try {
-          const Response = axios.post('https://apirepetiteur.wadounnou.com/api/notifications', userData, config);
+          const Response = axios.post('https://www.api-mon-encadreur.com/api/notifications', userData, config);
           //console.log('notification Response:', Response.data);
           if (Response.status === 201) {
            // alert('Votre Compte répétiteur est mi en evaluation');
           }
         } catch (Error) {
-          console.error('Erreur lors de la mise en évaluationde votre compte :', Error);
+          console.error('Erreur lors de la mise en évaluation de votre compte :', Error);
 
         }
                     this.$router.push('/admin/dashboard');
                 }else{
-                  alert("une erreur s'est produite veuiller réessayer plus tard")
+                  Swal.fire({
+                    title:"Quelques chose s'est mal passé veuillez réessayer plus tard",
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 5000
+                  });
                 }
                 this.model={
                    
@@ -548,11 +583,12 @@ const config={
 .catch(error => {
   if (error.response) {
             console.log(error.response.data.message); 
-            this.errorList = "une erreur s'est produite veuiller réessayer plus tard ";
+           // this.errorList = "une erreur s'est produite veuiller réessayer plus tard ";
             Swal.fire({
                     title:"Quelques chose s'est mal passé veuillez réessayer plus tard",
                     icon: 'error',
-                    confirmButtonText: 'OK'
+                    showConfirmButton: false,
+                    timer: 5000
                   });
 
         } else if (error.request) {

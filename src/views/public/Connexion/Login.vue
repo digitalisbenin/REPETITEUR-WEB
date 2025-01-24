@@ -127,14 +127,14 @@
   
 <footer class="bg-green-600 text-white py-6">
   <div class="container mx-auto">
-    <div class="flex flex-col md:flex-row justify-between ml-12">
+    <div class="flex flex-col md:flex-row justify-between lg:ml-12">
       
       <div class="md:w-1/3">
         <h2 class="text-2xl font-semibold mb-4">Contactez-nous</h2>
-        
-        <p class="text-lg">Abomey-Calavi, Code Postal</p>
-        <p class="text-lg">Email : contact01.digitalis@gmail.com</p>
-        <p class="text-lg">Téléphone : +229 97825820</p>
+        <p class="text-lg">Adresses: Abomey-Calavi / Togoudo</p>
+          <p class="text-lg">Email : info@mon-encadreur.com</p>
+          <p class="text-lg">Téléphones :0197825820 / 0194863786</p>
+       
       </div>
 
       
@@ -142,7 +142,7 @@
         <h2 class="text-2xl font-semibold mb-4">Liens rapides</h2>
         <ul>
           <li><a href="/" class="hover:text-gray-400 text-lg ">Accueil</a></li>
-          <li><a href="/#repetiteur" class="hover:text-gray-400 text-lg">Rechercher un répétiteur</a></li>
+          <li><a href="/#repetiteur" class="hover:text-gray-400 text-lg">Rechercher un encadreur</a></li>
           <li><a href="/login" class="hover:text-gray-400 text-lg">Faire une demande</a></li>
           <li><a href="/login" class="hover:text-gray-400 text-lg">Connexion</a></li>
         </ul>
@@ -225,7 +225,7 @@ export default {
    
       getrole(){
 
-axios.get('https://apirepetiteur.wadounnou.com/api/roles',)
+axios.get('https://www.api-mon-encadreur.com/api/roles',)
 .then(response => {
  this.role = response.data.data;
  this.repetiteur = response.data.data[0].id;
@@ -243,14 +243,14 @@ axios.get('https://apirepetiteur.wadounnou.com/api/roles',)
 
   },
   getrepetiteur(){
-    axios.get('https://apirepetiteur.wadounnou.com/api/repetiteurs').then(res=>{
+    axios.get('https://www.api-mon-encadreur.com/api/repetiteurs').then(res=>{
                 this.repetiteurs = res.data.data
                   
                // console.log(this.repetiteurs)
             });
   },
   getparents(){
-    axios.get('https://apirepetiteur.wadounnou.com/api/parents').then(res=>{
+    axios.get('https://www.api-mon-encadreur.com/api/parents').then(res=>{
                 this.parentes = res.data.data
                   
                // console.log(this.parentes)
@@ -279,11 +279,11 @@ axios.get('https://apirepetiteur.wadounnou.com/api/roles',)
     } else if (this.model.login.phone) {
       loginData = { phone: this.model.login.phone, password: this.model.login.password };
     }
-    console.log(loginData);
+    //console.log(loginData);
     // Requête de connexion
-    const loginResponse = await axios.post('https://apirepetiteur.wadounnou.com/api/auth/login',loginData);
+    const loginResponse = await axios.post('https://www.api-mon-encadreur.com/api/auth/login',loginData);
 
-    console.log(loginResponse);
+    //console.log(loginResponse);
    //console.log(loginResponse.data.data.password);
 
     this.model.login = { email: '', password: '' };
@@ -302,7 +302,7 @@ axios.get('https://apirepetiteur.wadounnou.com/api/roles',)
       //console.log(config);
 
       // Requête pour récupérer le profil
-      const profileResponse = await axios.get('https://apirepetiteur.wadounnou.com/api/profile', config);
+      const profileResponse = await axios.get('https://www.api-mon-encadreur.com/api/profile', config);
       
       // Stocker les données du profil dans le composant ou Vuex
       this.role_id = profileResponse.data.role_id;
@@ -336,7 +336,7 @@ axios.get('https://apirepetiteur.wadounnou.com/api/roles',)
       if (this.role_id === this.parents && this.paentResults.length === 0) {
         //console.log('test');
         try {
-          const parentsResponse = await axios.post('https://apirepetiteur.wadounnou.com/api/parents', userData, config);
+          const parentsResponse = await axios.post('https://www.api-mon-encadreur.com/api/parents', userData, config);
           //console.log('Parents Response:', parentsResponse.data);
 
           // Stockage de l'ID des parents dans le stockage local et Vuex
@@ -351,7 +351,8 @@ axios.get('https://apirepetiteur.wadounnou.com/api/roles',)
             Swal.fire({
                     title: 'Compte parents validé avec succès',
                     icon: 'success',
-                    confirmButtonText: 'OK'
+                    showConfirmButton: false,
+                    timer: 5000
                   });
           }
 
@@ -383,24 +384,24 @@ axios.get('https://apirepetiteur.wadounnou.com/api/roles',)
   
   } 
   catch (error) {
-    console.log(error);
-    console.log(error.data);
-    console.log(error.response);
-    console.error('Une erreur s\'est produite lors de la connexion :', error);
+    // console.log(error);
+    // console.log(error.data);
+    // console.log(error.response);
+    // console.error('Une erreur s\'est produite lors de la connexion :', error);
     // if (loginResponse.data.data) {
     //   alert('Votre mot de passe doit contenir 8 caractère minimum')
     // }
     if (error.response) {
-    console.log(error.response.data.data);
+    // console.log(error.response.data.data);
            // this.errorList = 'Vos identifiants sont incorrectes';
            // alert('Vos identifiant sont incorrecte')
             Swal.fire({
   title: 'Vos identifiant sont incorrecte',
-  
   icon: 'error',
-  confirmButtonText: 'OK'
+  showConfirmButton: false,
+  timer: 5000
 });
-            console.log(error.response.data.message);
+            // console.log(error.response.data.message);
             console.log(error.response);
         } else if (error.request) {
             console.log(error.request);

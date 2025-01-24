@@ -266,8 +266,8 @@
       this.isModalOpen = true;
       this.reponseId = enfantId;
       this.messagee = message;
-      console.log(this.reponseId);
-      console.log(this.message);
+      //console.log(this.reponseId);
+      //console.log(this.message);
     },
     closeModal() {
       this.isModalOpen = false;
@@ -280,8 +280,8 @@
       this.isModalSecondOpen = true;
       this.messageId = enfantIds;
       this.messaages = messager;
-      console.log(this.messageId);
-      console.log(this.messaages);
+      //console.log(this.messageId);
+      //console.log(this.messaages);
     },
     closeSecondModal() {
       this.isModalSecondOpen = false;
@@ -318,7 +318,7 @@
       //console.log(config);
 
       // Requête pour récupérer le profil
-      const profileResponse  = await axios.get('https://apirepetiteur.wadounnou.com/api/profile', config);
+      const profileResponse  = await axios.get('https://www.api-mon-encadreur.com/api/profile', config);
         //console.log(profileResponse);
       // Stocker les données du profil dans le composant ou Vuex
       this.role_id = profileResponse.data.role_id;
@@ -326,7 +326,7 @@
       //console.log(this.role_id);
       //console.log(this.user_id);
 
-    axios.get('https://apirepetiteur.wadounnou.com/api/repetiteurs').then(res=>{
+    axios.get('https://www.api-mon-encadreur.com/api/repetiteurs').then(res=>{
                 this.repetiteurs = res.data.data.filter(repetiteur => repetiteur.user.id === this.user_id)
                   
                 //console.log(this.repetiteurs)
@@ -343,14 +343,14 @@
         this.loading = false; // Set loading to false when data is fetched
       }, 7000);
             const repetiteur_id = localStorage.getItem('repetiteur_id');
-            console.log(repetiteur_id);
-            console.log(studentId)
-           console.log(this.repetiteurs_id);
-           await axios.get('https://apirepetiteur.wadounnou.com/api/postes').then(res=>{
+           // console.log(repetiteur_id);
+            //console.log(studentId)
+           //console.log(this.repetiteurs_id);
+           await axios.get('https://www.api-mon-encadreur.com/api/postes').then(res=>{
                 this.enfants=res.data.data.filter(enfant => enfant.repetiteur.id === this.repetiteurs_id);
-                console.log(this.enfants)
-                console.log(res.data.data)
-                console.log(this.repetiteurs_id)
+                //console.log(this.enfants)
+                //console.log(res.data.data)
+                //console.log(this.repetiteurs_id)
                
             });
            // console.log(enfants);

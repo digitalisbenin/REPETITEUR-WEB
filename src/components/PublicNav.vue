@@ -27,23 +27,22 @@
       </div>
 
       <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
-      <ul
-        :class="{
-          flex: showMenu,
-          hidden: !showMenu,
-        }"
-        class=" font-semibold text-start justify-end  text-xl flex-col  space-y-4 md:flex md:space-y-0 md:flex-row md:items-center md:space-x-1 md:mt-0"
+      <ul 
+        
+
+         class="hidden md:flex md:items-center md:space-x-6 font-semibold text-xl  text-gray-800"
+         
       >
         <li class="px-3 text-dark hover:text-green-700">
-          <RouterLink class="focus:text-green-700 active:text-green-700" to="/" onclick="window.scrollTo(0, 0);"
+          <RouterLink class="focus:text-green-700 active:text-green-700" to="/"  @click="closeMenu" onclick="window.scrollTo(0, 0);"
             >Accueil</RouterLink
           >
         </li>
         <li
           class="px-3 text-dark hover:text-green-700 focus:text-green-700 active:text-green-700"
         >
-          <a class="focus:text-green-500 active:text-green-500" href="/#clients"  
-            >Rechercher un répétiteur
+          <a class="focus:text-green-500 active:text-green-500" href="/#clients"   @click="closeMenu"
+            >Rechercher un encadreur
           </a>
         </li>
         <li
@@ -53,6 +52,7 @@
             class="focus:text-green-700 active:text-green-700 "
             @click.prevent="redirect"
             href="" onclick="window.scrollTo(0, 0);"
+             @click="closeMenu"
             >Faire une demande</a
           >
         </li>
@@ -92,7 +92,7 @@
             >
               <li>
                 <button
-                  
+                   @click="closeMenu"
                   @click.prevent="redirecte"
                   class="block px-4 py-2 hover:bg-gray-100 "
                   >Nos epreuves</button
@@ -101,15 +101,16 @@
               <li>
                 <RouterLink
                   to="/examens"
-                  @click="closeDropdown('menu1')"
+                  @click="closeDropdown('menu1'); closeMenu"
                   class="block px-4 py-2 hover:bg-gray-100 "
+                   
                   >Examens blancs</RouterLink
                 >
               </li>
               <li>
                 <a
                   href="#"
-                  @click="closeDropdown('menu1')"
+                  @click="closeDropdown('menu1'); closeMenu"
                   class="block px-4 py-2 hover:bg-gray-100 "
                   >Nos tutoriels</a
                 >
@@ -117,14 +118,19 @@
             </ul>
           </div>
         </li>
-        <li class="px-3 text-dark hover:text-green-700 focus:text-green-700 active:text-green-700">
-          <RouterLink class="focus:text-green-700 active:text-green-700" to="/about"
+        <li
+        :class="{
+          flex: showMenu,
+          hidden: !showMenu,
+        }"
+        class="px-3 text-dark hover:text-green-700 focus:text-green-700 active:text-green-700">
+          <RouterLink class="focus:text-green-700 active:text-green-700" to="/about" @click="closeMenu"
             >A propos</RouterLink
           >
         </li>
         <li class="px-3 text-dark hover:text-green-700 focus:text-green-700 active:text-green-700">
           <button
-            @click="toggleDropdown('menu2')"
+            @click="toggleDropdown('menu2'); closeMenu"
             class="flex items-center   py-2 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0  md:p-0 md:w-auto  focus:text-green-700 active:text-green-700"
           >
             Partenaires
@@ -156,7 +162,7 @@
               <li>
                 <RouterLink
                   to="/partenaires"
-                  @click="closeDropdown('menu2')"
+                  @click="closeDropdown('menu2'); closeMenu"
                   class="block px-4 py-2 hover:bg-gray-100  text-xl  font-bold"
                   >Ecoles</RouterLink
                 >
@@ -164,7 +170,7 @@
               <li>
                 <RouterLink
                   to="/librairie"
-                  @click="closeDropdown('menu2')"
+                  @click="closeDropdown('menu2'); closeMenu"
                   class="block px-4 py-2 hover:bg-gray-100  text-xl  font-bold"
                   >Librairies</RouterLink
                 >
@@ -172,7 +178,7 @@
               <li>
                 <a
                   href="#"
-                  @click="closeDropdown('menu2')"
+                  @click="closeDropdown('menu2'); closeMenu"
                   class="block px-4 py-2 hover:bg-gray-100  text-xl  font-bold"
                   >Autres</a
                 >
@@ -181,32 +187,6 @@
           </div>
         </li>
 
-        <!-- <li>
-          <button @click="toggleDropdown" class="flex items-center justify-between w-full py-2 px-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-            Dropdown 
-            <svg v-if="isDropdownOpen" class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-            </svg>
-          </button>
-      
-         
-          <div v-if="isDropdownOpen" id="dropdownNavbar" class="z-10 absolute font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLargeButton">
-              <li>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-              </li>
-              <li>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Paramètres</a>
-              </li>
-              <li>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Gains</a>
-              </li>
-            </ul>
-            <div class="py-1">
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" @click="signOut">Se déconnecter</a>
-            </div>
-          </div>
-        </li> -->
 
         <li v-if=" this.tokene && this.roleName==='Parents'">
           <div class="relative" @click="toggleDropdowne">
@@ -274,7 +254,240 @@
             <!-- <a class="focus:text-white active:text-white" href="/login"
               >Se connecter</a
             > -->
-            <RouterLink class="focus:text-white active:text-white" to="/login"  onclick="window.scrollTo(0, 0);"
+            <RouterLink class="focus:text-white active:text-white" to="/login"  onclick="window.scrollTo(0, 0);" @click="closeMenu"
+            >Se connecter</RouterLink>
+          </button>
+        </li>
+      </ul>
+      <!-- responsivité mibile -->
+      <ul 
+        :class="{
+          flex: showMenu,
+          hidden: !showMenu,
+        }"
+
+          class="fixed top-14 right-0 w-64 h-2/3 flex-col bg-blue-900 font-semibold  text-white text-center space-y-6 p-6 md:hidden"
+       
+      >
+      <!--  class=" font-semibold text-start justify-end  text-xl flex-col  space-y-4 md:flex md:space-y-0 md:flex-row md:items-center md:space-x-1 md:mt-0" -->
+        <li class="px-3 text-dark hover:text-green-700">
+          <RouterLink class="focus:text-green-700 active:text-green-700" to="/"  @click="closeMenu" onclick="window.scrollTo(0, 0);"
+            >Accueil</RouterLink
+          >
+        </li>
+        <li
+          class="px-3 text-dark hover:text-green-700 focus:text-green-700 active:text-green-700"
+        >
+          <a class="focus:text-green-500 active:text-green-500" href="/#clients"   @click="closeMenu"
+            >Rechercher un encadreur
+          </a>
+        </li>
+        <li
+          class="px-3 text-dark hover:text-green-700 focus:text-green-700 active:text-green-700"
+        >
+          <a
+            class="focus:text-green-700 active:text-green-700 "
+            @click.prevent="redirect"
+            href="" onclick="window.scrollTo(0, 0);"
+             @click="closeMenu"
+            >Faire une demande</a
+          >
+        </li>
+
+        <li
+          class="px-3 text-dark hover:text-green-700 focus:text-green-700 active:text-green-700"
+        >
+          <button
+            @click="toggleDropdown('menu1')"
+            class=" items-center   py-2 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 focus:text-green-700 active:text-green-700 md:p-0 md:w-auto "
+          >
+            Ressources
+            <!-- <svg
+              class="w-2.5 h-2.5 ms-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 4 4 4-4"
+              />
+            </svg> -->
+          </button>
+          <div
+            v-if="isDropdownOpen.menu1"
+            id="dropdownNavbar"
+            class="z-10 absolute font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-48 "
+          >
+            <ul
+              class="py-2 text-sm text-gray-700 font-bold text-xl"
+              aria-labelledby="dropdownLargeButton"
+            >
+              <li>
+                <button
+                   @click="closeMenu"
+                  @click.prevent="redirecte"
+                  class="block px-4 py-2 hover:bg-gray-100 "
+                  >Nos epreuves</button
+                >
+              </li>
+              <li>
+                <RouterLink
+                  to="/examens"
+                  @click="closeDropdown('menu1'); closeMenu"
+                  class="block px-4 py-2 hover:bg-gray-100 "
+                   
+                  >Examens blancs</RouterLink
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  @click="closeDropdown('menu1'); closeMenu"
+                  class="block px-4 py-2 hover:bg-gray-100 "
+                  >Nos tutoriels</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li
+        class="px-3 text-dark hover:text-green-700 focus:text-green-700 active:text-green-700">
+          <RouterLink class="focus:text-green-700 active:text-green-700" to="/about" @click="closeMenu"
+            >A propos</RouterLink
+          >
+        </li>
+        <li class="px-3 text-dark hover:text-green-700 focus:text-green-700 active:text-green-700">
+          <button
+            @click="toggleDropdown('menu2'); closeMenu"
+            class=" items-center   py-2 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0  md:p-0 md:w-auto  focus:text-green-700 active:text-green-700"
+          >
+            Partenaires
+            <!-- <svg
+              class="w-2.5 h-2.5 ms-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 4 4 4-4"
+              />
+            </svg> -->
+          </button>
+          <div
+            v-if="isDropdownOpen.menu2"
+            id="dropdownNavbar"
+            class="z-10 absolute font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 "
+          >
+            <ul
+              class="py-2 text-sm text-gray-700 "
+              aria-labelledby="dropdownLargeButton"
+            >
+              <li>
+                <RouterLink
+                  to="/partenaires"
+                  @click="closeDropdown('menu2'); closeMenu"
+                  class="block px-4 py-2 hover:bg-gray-100  text-xl  font-bold"
+                  >Ecoles</RouterLink
+                >
+              </li>
+              <li>
+                <RouterLink
+                  to="/librairie"
+                  @click="closeDropdown('menu2'); closeMenu"
+                  class="block px-4 py-2 hover:bg-gray-100  text-xl  font-bold"
+                  >Librairies</RouterLink
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  @click="closeDropdown('menu2'); closeMenu"
+                  class="block px-4 py-2 hover:bg-gray-100  text-xl  font-bold"
+                  >Autres</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+
+
+        <li v-if=" this.tokene && this.roleName==='Parents'">
+          <div class="relative" @click="toggleDropdowne">
+            <div>
+              <button
+                type="button"
+                class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                id="user-menu-button"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <span class="absolute -inset-1.5"></span>
+                <span class="sr-only">Open user menu</span>
+                <img
+                  class="h-12 w-12 rounded-full"
+                  src="../assets/images/profil.jpg"
+                  alt=""
+                />
+              </button>
+            </div>
+
+            <!-- Dropdown menu -->
+            <div
+              v-show="isDropdown"
+              class="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="user-menu-button"
+              tabindex="-1"
+            >
+              <!-- Active: "bg-gray-100", Not Active: "" -->
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700 font-bold"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-0"
+              ></a>
+              <RouterLink
+                to="/admin/demande"
+                class="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-700 font-bold"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-1"
+                >Tableau de bord</RouterLink
+              >
+              <button
+                @click="logout()"
+                onclick="window.scrollTo(0, 0);"
+                class="block px-4 py-2  hover:bg-gray-100 text-sm text-gray-700 font-bold"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-2"
+              >
+                Déconnexion
+              </button>
+            </div>
+          </div>
+        </li>
+
+        <li v-else class="px-3">
+          <button
+            class="bg-green-700 px-6 py-3 text-white poppins rounded-full ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105"
+          >
+            <!-- <a class="focus:text-white active:text-white" href="/login"
+              >Se connecter</a
+            > -->
+            <RouterLink class="focus:text-white active:text-white" to="/login"  onclick="window.scrollTo(0, 0);" @click="closeMenu"
             >Se connecter</RouterLink>
           </button>
         </li>
@@ -289,6 +502,7 @@ export default {
   name: "PublicNav",
   data() {
     return {
+      
       showMenu: false,
       isDropdownOpen: {
         menu1: false,
@@ -317,8 +531,8 @@ export default {
     .then(response => {
       this.user_id = response.data.id;
       this.roleName = response.data.role.name;
-      console.log(response);
-      console.log(this.roleName);
+      //console.log(response);
+      //console.log(this.roleName);
     //   console.log(response.data.id);
     //   console.log( this.user_id);
     })
@@ -331,13 +545,12 @@ export default {
       }
     });
     },
-    toggleDropdowne() {
-      this.isDropdown = !this.isDropdown;
-    },
-
     toggleNav() {
-      this.showMenu = !this.showMenu;
-    },
+    this.showMenu = !this.showMenu; // Ouvrir ou fermer le menu
+  },
+  closeMenu() {
+    this.showMenu = false; // Fermer le menu
+  },
     toggleDropdown(menu) {
       for (const key in this.isDropdownOpen) {
         if (key !== menu) {
@@ -350,6 +563,7 @@ export default {
     },
     closeDropdown(menu) {
       this.isDropdownOpen[menu] = false;
+      this.showMenu = false;
     },
     async logout() {
       this.tokene = "";
@@ -379,18 +593,18 @@ export default {
         }
       }
     },
-    async profile() {
-      try {
-        const response = await axios.get("/api/profile");
-        if (response.data) {
-          this.name = response.data.name;
-          this.user = response.data.id;
-          //console.log(this.user);
-        }
-      } catch (error) {
-        console.log(error.data);
-      }
-    },
+    // async profile() {
+    //   try {
+    //     const response = await axios.get("/api/profile");
+    //     if (response.data) {
+    //       this.name = response.data.name;
+    //       this.user = response.data.id;
+    //       //console.log(this.user);
+    //     }
+    //   } catch (error) {
+    //     console.log(error.data);
+    //   }
+    // },
     redirect() {
       this.tokene = localStorage.getItem("token");
       if (this.tokene) {

@@ -257,8 +257,8 @@ export default {
       this.isModalOpen = true;
       this.reponseId = enfantId;
       this.message = message;
-      console.log(this.reponseId);
-      console.log(this.message);
+      //console.log(this.reponseId);
+      //console.log(this.message);
     },
     closeModal() {
       this.isModalOpen = false;
@@ -271,8 +271,8 @@ export default {
       this.isModalSecondOpen = true;
       this.messageId = enfantIds;
       this.messaages = messager;
-      console.log(this.messageId);
-      console.log(this.messaages);
+      //console.log(this.messageId);
+      //console.log(this.messaages);
     },
     closeSecondModal() {
       this.isModalSecondOpen = false;
@@ -306,7 +306,7 @@ export default {
       };
       //console.log(config);
       axios
-        .get("https://apirepetiteur.wadounnou.com/api/profile", config)
+        .get("https://www.api-mon-encadreur.com/api/profile", config)
         .then((response) => {
           this.user_id = response.data.id;
           //   this.name=response.data.name
@@ -333,13 +333,13 @@ export default {
         this.loading = false; // Set loading to false when data is fetched
       }, 2000);
       axios
-        .get("https://apirepetiteur.wadounnou.com/api/messages")
+        .get("https://www.api-mon-encadreur.com/api/messages")
         .then((res) => {
           this.messagees = res.data.data.filter(
             (result) => result.user.id === this.user_id
           );
-          console.log(this.user_id);
-          console.log(this.messagees);
+          //console.log(this.user_id);
+          //console.log(this.messagees);
         });
     },
   },

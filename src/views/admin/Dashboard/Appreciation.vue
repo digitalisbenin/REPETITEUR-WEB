@@ -74,7 +74,7 @@
                   class="w-1/3 bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                   required
                 >
-                  <option value="">Répétiteur</option>
+                  <option value="">Encadreur</option>
                   <option
                     v-for="(repetite, index) in this.post"
                     :key="index"
@@ -99,7 +99,7 @@
 
                 <th scope="col" class="px-6 py-3">Appréciation sur l'enfant</th>
 
-                <th scope="col" class="px-6 py-3">Répétiteur</th>
+                <th scope="col" class="px-6 py-3">Encadreur</th>
                 <th scope="col" class="px-6 py-3">Actions</th>
               </tr>
             </thead>
@@ -329,7 +329,7 @@ export default {
 
       // Requête pour récupérer le profil
       const profileResponse = await axios.get(
-        "https://apirepetiteur.wadounnou.com/api/profile",
+        "https://www.api-mon-encadreur.com/api/profile",
         config
       );
       //console.log(profileResponse);
@@ -339,7 +339,7 @@ export default {
       //console.log(this.role_id);
       //console.log(this.user_id);
 
-      axios.get("https://apirepetiteur.wadounnou.com/api/parents").then((res) => {
+      axios.get("https://www.api-mon-encadreur.com/api/parents").then((res) => {
         this.parents = res.data.data.filter(
           (parent) => parent.user.id === this.user_id
         );
@@ -353,8 +353,8 @@ export default {
     getPostes() {
       setTimeout(() => {
         this.loading = false; // Set loading to false when data is fetched
-      }, 4000);
-      axios.get("https://apirepetiteur.wadounnou.com/api/postes").then((res) => {
+      }, 3000);
+      axios.get("https://www.api-mon-encadreur.com/api/postes").then((res) => {
         this.payement = res.data.data.filter(
           (payemet) => payemet.demande.enfants.parents.id === this.parentss_id
         );
@@ -366,8 +366,8 @@ export default {
         this.poste = this.post;
         this.enfan= this.post.filter((result)=>result.demande.enfants);
         this.repetite= this.post.filter((result)=>result.repetiteur);
-        console.log(this.enfan);
-        console.log(this.repetite);
+        //console.log(this.enfan);
+        //console.log(this.repetite);
        // console.log(this.poste);
       });
      // console.log(this.repet);
@@ -375,7 +375,7 @@ export default {
     },
     getEnfants() {
       //console.log(this.parentss_id);
-      axios.get("https://apirepetiteur.wadounnou.com/api/enfants").then((res) => {
+      axios.get("https://www.api-mon-encadreur.com/api/enfants").then((res) => {
         this.enfants = res.data.data.filter(
           (result) =>
             // result.status ==='Terminer' &&
@@ -446,7 +446,7 @@ export default {
 
       axios
         .put(
-          "https://apirepetiteur.wadounnou.com/api/postes/" + this.selectedEnfant,
+          "https://www.api-mon-encadreur.com/api/postes/" + this.selectedEnfant,
           dataToSend,
           config
         )
@@ -459,7 +459,8 @@ export default {
             Swal.fire({
                     title: 'Réponse envoyer avec succès',
                     icon: 'success',
-                    confirmButtonText: 'OK'
+                    confirmButtonText: 'OK',
+                    timer: 5000
                   });
             this.closeModal();
           }
@@ -468,7 +469,8 @@ export default {
           Swal.fire({
                     title: "Quelques chose s'est mal passé veuillez réessayer plus tard",
                     icon: 'error',
-                    confirmButtonText: 'OK'
+                    confirmButtonText: 'OK',
+                    timer: 5000
                   });
           // Une erreur s'est produite lors de la mise à jour, vous pouvez traiter l'erreur ici
           console.error("Erreur lors de la mise à jour:", error);

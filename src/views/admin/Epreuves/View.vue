@@ -189,7 +189,7 @@ headers: {
 //console.log(config);
 
 // Requête pour récupérer le profil
-const profileResponse  = await axios.get('https://apirepetiteur.wadounnou.com/api/profile', config);
+const profileResponse  = await axios.get('https://www.api-mon-encadreur.com/api/profile', config);
 //console.log(profileResponse);
 // Stocker les données du profil dans le composant ou Vuex
 this.role_id = profileResponse.data.role_id;
@@ -197,7 +197,7 @@ this.user_id = profileResponse.data.id;
 //console.log(this.role_id);
 //console.log(this.user_id);
 
-axios.get('https://apirepetiteur.wadounnou.com/api/repetiteurs').then(res=>{
+axios.get('https://www.api-mon-encadreur.com/api/repetiteurs').then(res=>{
     this.repetiteurs = res.data.data.filter(repetiteur => repetiteur.user.id === this.user_id)
       
     //console.log(this.repetiteurs)
@@ -214,7 +214,7 @@ const repetiteur_id = localStorage.getItem('repetiteur_id');
 // console.log(repetiteur_id);
 // console.log(studentId)
 // console.log(this.repetiteurs_id);
-await axios.get('https://apirepetiteur.wadounnou.com/api/demandes').then(res=>{
+await axios.get('https://www.api-mon-encadreur.com/api/demandes').then(res=>{
     this.enfants=res.data.data.filter(enfant => enfant.repetiteur.id === this.repetiteurs_id);
    // console.log(this.enfants)
    
@@ -228,7 +228,7 @@ this.getEpreuve();
             setTimeout(() => {
         this.loading = false; // Set loading to false when data is fetched
       }, 3000);
-            axios.get('https://apirepetiteur.wadounnou.com/api/epreuves').then(res=>{
+            axios.get('https://www.api-mon-encadreur.com/api/epreuves').then(res=>{
                 this.epreuves=res.data.data
                 //console.log(this.epreuves)
                 //console.log(res)
@@ -267,7 +267,7 @@ this.getEpreuve();
            };
           // console.log(config);
   //console.log(dataToSend);
-            axios.post( 'https://apirepetiteur.wadounnou.com/api/epreuves',dataToSend,config ).then(res =>{
+            axios.post( 'https://www.api-mon-encadreur.com/api/epreuves',dataToSend,config ).then(res =>{
   
                 //console.log(res.data)
                // alert(res.data.message);
@@ -326,7 +326,7 @@ this.getEpreuve();
            };
            //console.log(config);
   //console.log(dataToSend);
-            axios.post( 'https://apirepetiteur.wadounnou.com/api/postes',dataToSend,config ).then(res =>{
+            axios.post( 'https://www.api-mon-encadreur.com/api/postes',dataToSend,config ).then(res =>{
   
                 //console.log(res.data)
                // alert(res.data.message);

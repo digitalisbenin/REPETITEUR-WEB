@@ -9,7 +9,7 @@
          <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
            <div class="p-6 space-y-4 md:space-y-6 sm:p-8 " >
             <div class="card-header">
-                <h4 class="text-2xl text-center font-bold text-black-500 mt-4 mb-6">Réinitialiser votre mot de passe</h4>
+                <h4 class="text-2xl text-center font-bold text-black-500 mt-4 mb-6">Nouveau mot de passe</h4>
             </div>
             <div class="card-body">
                 
@@ -22,16 +22,23 @@
                 </li>
             </ul> -->
             <form @submit.prevent="saveStudent">
-                <div class="mb-6">
-                  <label for="email" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">Email</label>
-                  <input type="email" v-model="email"   id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="" required>
+                <div class="mb-2">
+                  <label for="email" class="block mb-2 text-start text-xl font-medium text-gray-900 dark:text-white">Email</label>
+                  <input type="email" v-model="form.email"   id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="" required>
                 </div>
                
-               
+                <div class="mb-2">
+                    <label for="email" class="block text-start mb-2 text-xl font-medium text-gray-900 dark:text-white">Nouveau mot de passe</label>
+                    <input type="password" v-model="form.password"    id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="" required>
+                  </div>
+                  <div class="mb-2">
+                    <label for="email" class="block text-start mb-2 text-xl font-medium text-gray-900 dark:text-white">Confirmation du nouveau mot de passe</label>
+                    <input type="password" v-model="form.password_confirmation"   id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="" required>
+                  </div>
          <br>
                 <div class="flex justify-center">
                     <!-- <span>Pas encore de compte ? <a href="/signup">S'inscrire</a> </span>  -->
-                    <button type="submit" class="text-white bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Envoyer</button>
+                    <button type="submit" class="text-white bg-green-600  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center">Reinitialiser</button>
                     
                 </div>
                 
@@ -62,8 +69,8 @@
         <h2 class="text-2xl font-semibold mb-4">Contactez-nous</h2>
         
         <p class="text-lg">Adresses: Abomey-Calavi / Togoudo</p>
-        <p class="text-lg">Email : info@mon-encadreur.com</p>
-        <p class="text-lg">Téléphones :0197825820 / 0194863786</p>
+          <p class="text-lg">Email : info@mon-encadreur.com</p>
+          <p class="text-lg">Téléphones :0197825820 / 0194863786</p>
       </div>
 
       
@@ -104,32 +111,45 @@
 import axios from 'axios'
 
 export default {
-    name:'forgot',
+    name:'reset',
  
     data(){
         return{
           
-            email:'',
+           
             errorList:'',
+            email: "",
+            form: {
+        email: "",
+        password: "",
+        token: "",
+        password_confirmation: "",
+      }, 
         }
     },
     mounted(){
-
+        if (this.$route.query.token) {
+      this.getToken();
+    }
       },
     methods:{
+        getToken() {
+      this.form.email = this.$route.query.token.split("=")[1];
+      this.form.token = this.$route.query.token.split("?")[0];
+    },
   
   async saveStudent() {
   try {
-  console.log(this.email);
     // Requête de connexion
-    const loginResponse = await axios.post('https://www.api-mon-encadreur.com/api/auth/password/email',{ email: this.email } );
+    console.log(this.form)
+    const loginResponse = await axios.post('https://www.api-mon-encadreur.com/api/auth/password/reset', this.form);
 
     console.log(loginResponse.data);
 
     if (loginResponse.data.success===true) {
                     //this.errorList = "Demande effectuée avec succès";
                     Swal.fire({
-                    title: "Votre demande a été reçue, veuillez vérifier votre boîte mail.",
+                    title: "Votre mot de passe a été modifié avec succès !",
                     icon: 'success',
                     confirmButtonText: 'OK'
                   });

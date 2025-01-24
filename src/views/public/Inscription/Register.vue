@@ -1,7 +1,7 @@
 
 <template>
   
- <div class="custom-background h-screen">
+ <div class="custom-background h-screen mt-8">
   <br>
   <br> 
   <div class="flex flex-col items-center justify-center px-6 py-7 mx-auto md:h-screen lg:py-0">
@@ -74,11 +74,28 @@
          </div>
          <label for="terms" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a></label>
        </div> -->
-       <div class="flex justify-between">
-         <button type="reset"  class=" w-36 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center "><RouterLink class="" to="/login">Annuler</RouterLink></button>
-         <button type="submit"  class=" w-32 text-white bg-green-600 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center">Enregistrer</button>
-       </div>
+       <!-- <div class="flex justify-between">
+         <button type="reset"  class=" w-36   text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center "><RouterLink class="" to="/login">Annuler</RouterLink></button>
+         <button type="submit"  class=" w-32  text-white bg-green-600 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center">Enregistrer</button>
+       </div> -->
        
+       <div class="flex justify-between space-x-4">
+        <!-- Bouton Annuler -->
+        <button 
+          type="reset" 
+          class="w-full md:w-36 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:text-lg px-4 py-2 text-center">
+          <RouterLink to="/login">Annuler</RouterLink>
+        </button>
+      
+        <!-- Bouton Enregistrer -->
+        <button 
+          type="submit" 
+          class="w-full md:w-32 text-white bg-green-600 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:text-lg px-4 py-2 text-center">
+          Enregistrer
+        </button>
+      </div>
+      
+      
      </form>
 
      </div>
@@ -86,22 +103,34 @@
 
  </div>
  <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ </div>
+
+ <br>
+ <br>
+ <br>
+ <br>
+ </div>
  
- </div>
- </div>
-   
+ <br>
+ <br>
+ <br>
+ <br> 
     
 
- <footer class="bg-green-600 text-white py-6">
+ <footer class="bg-green-600 text-white py-6 mt-15">
   <div class="container mx-auto">
-    <div class="flex flex-col md:flex-row justify-between ml-12">
+    <div class="flex flex-col md:flex-row justify-between lg:ml-12">
       
       <div class="md:w-1/3">
         <h2 class="text-2xl font-semibold mb-4">Contactez-nous</h2>
         
-        <p class="text-lg">Abomey-Calavi, Code Postal</p>
-        <p class="text-lg">Email : contact01.digitalis@gmail.com</p>
-        <p class="text-lg">Téléphone : +229 97825820</p>
+        <p class="text-lg">Adresses: Abomey-Calavi / Togoudo</p>
+        <p class="text-lg">Email : info@mon-encadreur.com</p>
+        <p class="text-lg">Téléphones :0197825820 / 0194863786</p>
       </div>
 
       
@@ -109,7 +138,7 @@
         <h2 class="text-2xl font-semibold mb-4">Liens rapides</h2>
         <ul>
           <li><a href="/" class="hover:text-gray-400 text-lg ">Accueil</a></li>
-          <li><a href="/#repetiteur" class="hover:text-gray-400 text-lg">Rechercher un répétiteur</a></li>
+          <li><a href="/#repetiteur" class="hover:text-gray-400 text-lg">Rechercher un encadreur</a></li>
           <li><a href="/login" class="hover:text-gray-400 text-lg">Faire une demande</a></li>
           <li><a href="/login" class="hover:text-gray-400 text-lg">Connexion</a></li>
         </ul>
@@ -141,6 +170,7 @@
 <script>
  import axios from 'axios'
 
+
 export default {
     name:'register',
     data(){
@@ -167,7 +197,7 @@ export default {
 
       getrole(){
 
-    axios.get('https://apirepetiteur.wadounnou.com/api/roles',)
+    axios.get('https://www.api-mon-encadreur.com/api/roles',)
    .then(response => {
      this.role = response.data.data;
      this.options = [response.data.data[0], response.data.data[response.data.data.length - 1]];
@@ -196,9 +226,9 @@ export default {
 
         console.log(dataToSend);
 
-        const apiUrl = 'https://apirepetiteur.wadounnou.com/api/auth/register';
+        const apiUrl = 'https://www.api-mon-encadreur.com/api/auth/register';
         const response = await axios.post(apiUrl, dataToSend);
-        console.log(response);
+       // console.log(response);
 
         if (response.data.success) {
            // alert(response.data.message);
@@ -206,7 +236,8 @@ export default {
             title: 'inscription réussi avec succès',
             
             icon: 'success',
-            confirmButtonText: 'OK'
+            showConfirmButton: false,
+            timer: 5000
           });
             
            // this.errorList = response.data.message;
@@ -217,16 +248,17 @@ export default {
             Swal.fire({
             title: 'ce email ou ce numéro de téléphone existe déjà',
             icon: 'error',
-            confirmButtonText: 'OK'
+             showConfirmButton: false,
+  timer: 5000
           });
           }else{
             alert(response.data.message);
           }
             
             //this.errorList = response.data.message;
-            console.log(response);
-            console.log(response.data);
-            console.log(response.data.data.email);
+            //console.log(response);
+           // console.log(response.data);
+            //console.log(response.data.data.email);
         }
     } catch (error) {
         console.error("Une erreur inattendue s'est produite:", error);

@@ -114,7 +114,7 @@ export default {
       }
             };
            // console.log(config);
-     axios.get('https://apirepetiteur.wadounnou.com/api/profile',config)
+     axios.get('https://www.api-mon-encadreur.com/api/profile',config)
     .then(response => {
       this.user_id = response.data.id;
       this.name=response.data.name
@@ -135,7 +135,7 @@ export default {
     this.getMessage();
         },
         getAdmin(){
-    axios.get('https://apirepetiteur.wadounnou.com/api/users').then(res=>{
+    axios.get('https://www.api-mon-encadreur.com/api/users').then(res=>{
                 this.admin = res.data.data.filter(result =>
                    result.name === 'Supper Admin'
 
@@ -149,7 +149,7 @@ export default {
             });
 },
 getMessage(){
-    axios.get('https://apirepetiteur.wadounnou.com/api/messages').then(res=>{
+    axios.get('https://www.api-mon-encadreur.com/api/messages').then(res=>{
                 this.messagees = res.data.data.filter(result =>
                    result.user.id === this.user_id
 
@@ -158,89 +158,158 @@ getMessage(){
                     console.log( this.messagees);
             });
 },
-    
-        saveDemande(){
-            var mythis= this;
+saveDemande() {
+    var mythis = this;
 
+    const dataToSend = {
+        name: this.name,
+        phone: this.phone,
+        email: this.email,
+        objet: this.objet,
+        message: this.message,
+        user_id: this.user_id,
+    };
 
-            const dataToSend = {
- name:this.name,
-phone:this.phone,
-email:this.email,
-objet:this.objet,
-message:this.message,
-user_id: this.user_id,
+    const token = localStorage.getItem('token');
 
-};
-const token = localStorage.getItem('token');
-           
-           //console.log(token);
-           const config={
-               headers: {
-       'Authorization': 'Bearer ' + token // Bearer 14|LhMjIdjCKZjxzEeSHNOOE0eQUUCM28lHQ6JbW1pOb16e3fa8 // Remplacez par le token d'authentification réel
-     }
-           };
-           //console.log(config);
-//console.log(dataToSend);
-            axios.post( 'https://apirepetiteur.wadounnou.com/api/messages',dataToSend,config ).then(res =>{
-
-                //console.log(res.data)
-               // alert(res.data.message);
-               if (res.status==201) {
-                localStorage.setItem('demande_id',res.data.data.id)
-               this.message_id=res.data.data.id
-                const userData = { 
-                      message_id: this.message_id,
-                      type: "message",
-                      user_id: this.admin_id,
-                      message: "Nouveau message",
-                    };
-                   // console.log(userData);
-                    try {
-          const Response = axios.post('https://apirepetiteur.wadounnou.com/api/notifications', userData, config);
-          console.log('notification Response:', Response.data);
-          if (Response.status === 201) {
-           // alert('Votre Compte répétiteur est mi en evaluation');
-           
-          }
-        } catch (Error) {
-          console.error('Erreur lors de la mise en évaluationde votre compte :', Error);
-
+    const config = {
+        headers: {
+            'Authorization': 'Bearer ' + token // Remplacez par le token d'authentification réel
         }
-                    mythis.errorList="Message envoyer avec succès"
-                    //alert('Message envoyer avec succès')
-                    Swal.fire({
-                    title: 'message envoyer avec succès',
+    };
+
+    axios.post('https://www.api-mon-encadreur.com/api/messages', dataToSend, config)
+        .then(res => {
+            if (res.status === 201) {
+                localStorage.setItem('demande_id', res.data.data.id);
+                this.message_id = res.data.data.id;
+
+                const userData = {
+                    message_id: this.message_id,
+                    type: "message",
+                    user_id: this.admin_id,
+                    message: "Nouveau message",
+                };
+
+                axios.post('https://www.api-mon-encadreur.com/api/notifications', userData, config)
+                    .then(notificationResponse => {
+                        if (notificationResponse.status === 201) {
+                            Swal.fire({
+                    title: 'Message envoyé avec succès',
                     icon: 'success',
-                    confirmButtonText: 'OK'
-                  });
-                    this.$router.push('/admin/reponse')
+                    showConfirmButton: false,
+                    timer: 5000
+                });
+                this.$router.push('/admin/reponse');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erreur lors de la mise en évaluation de votre compte :', error);
+                    });
+
+                //mythis.errorList = "Message envoyé avec succès";
+                
+            } else {
+                mythis.errorList = "Une erreur s'est produite";
+            }
+        })
+        .catch(error => {
+            if (error.response) {
+                if (error.response.status === 422) {
+                    mythis.errorList = error.response.data.errors;
+                    console.log(error.response.data.errors);
                 }
-                else{
-                    mythis.errorList="Une erreur s'est produite"
+            } else if (error.request) {
+                console.log(error.request);
+            } else {
+                console.log('Erreur :', error.message);
+            }
+        });
+}
+
+//          saveDemande(){
+//             var mythis= this;
+
+
+//             const dataToSend = {
+//                 name:this.name,
+//                 phone:this.phone,
+//                 email:this.email,
+//                 objet:this.objet,
+//                 message:this.message,
+//                 user_id: this.user_id,
+
+//                 };
+//                     const token = localStorage.getItem('token');
+           
+//            //console.log(token);
+//            const config={
+//                headers: {
+//        'Authorization': 'Bearer ' + token // Bearer 14|LhMjIdjCKZjxzEeSHNOOE0eQUUCM28lHQ6JbW1pOb16e3fa8 // Remplacez par le token d'authentification réel
+//      }
+//            };
+//            //console.log(config);
+// //console.log(dataToSend);
+//             axios.post( 'https://www.api-mon-encadreur.com/api/messages',dataToSend,config ).then(res =>{
+
+//                 //console.log(res.data)
+//                // alert(res.data.message);
+//                if (res.status==201) {
+//                 localStorage.setItem('demande_id',res.data.data.id)
+//                this.message_id=res.data.data.id
+//                 const userData = { 
+//                       message_id: this.message_id,
+//                       type: "message",
+//                       user_id: this.admin_id,
+//                       message: "Nouveau message",
+//                     };
+//                    // console.log(userData);
+//                     try {
+//           const Response = axios.post('https://www.api-mon-encadreur.com/api/notifications', userData, config);
+//           console.log('notification Response:', Response);
+//           if (Response.status === 201) {
+//            alert('Votre Compte répétiteur est mi en evaluation');
+           
+//           }
+//         } catch (Error) {
+//           console.error('Erreur lors de la mise en évaluationde votre compte :', Error);
+
+//         }
+//                     mythis.errorList="Message envoyer avec succès"
+//                     //alert('Message envoyer avec succès')
+//                     Swal.fire({
+//                     title: 'message envoyer avec succès',
+//                     icon: 'success',
+//                     confirmButtonText: 'OK',
+//                     timer: 5000
+//                   });
+//                     this.$router.push('/admin/reponse')
+//                 }
+//                 else{
+//                     mythis.errorList="Une erreur s'est produite"
                    
 
-                }
+//                 }
              
 
-            })
-            .catch(function(error)
-           {
+//             })
+//             .catch(function(error)
+//            {
              
-                if (error.reponse) {
-                    if (error.response.status==422) {
-                        mythis.errorList=error.response.data.errors;
-                        console.log(error.response.data.errors);
-                    }
+//                 if (error.reponse) {
+//                     if (error.response.status==422) {
+//                         mythis.errorList=error.response.data.errors;
+//                         console.log(error.response.data.errors);
+//                     }
 
-            } else if (error.request){
-                console.log(error.request);
-            }else{
-                console.log('Error'.error.message); 
-            }
-           }
-            )
-        }
+//             } else if (error.request){
+//                 console.log(error.request);
+//             }else{
+//                 console.log('Error'.error.message); 
+//             }
+//            }
+//             )
+//         }
     },
 }
 

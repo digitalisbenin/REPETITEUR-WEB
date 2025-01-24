@@ -154,7 +154,7 @@
       
      
       getEpreuve(){
-          axios.get('https://apirepetiteur.wadounnou.com/api/epreuves').then(res=>{
+          axios.get('https://www.api-mon-encadreur.com/api/epreuves').then(res=>{
               this.epreuv=res.data.data.filter(repItem => repItem.type === 'Examens')
              
               //console.log(this.classe)
@@ -164,7 +164,7 @@
           // console.log(this.epreuves)
           });
 
-          axios.get('https://apirepetiteur.wadounnou.com/api/matieres').then(res=>{
+          axios.get('https://www.api-mon-encadreur.com/api/matieres').then(res=>{
               this.matiere=res.data.data
               //console.log(this.matiere)
              
@@ -173,7 +173,7 @@
               
           });
 
-          axios.get('https://apirepetiteur.wadounnou.com/api/classes').then(res=>{
+          axios.get('https://www.api-mon-encadreur.com/api/classes').then(res=>{
               this.classe=res.data.data
              
               //console.log(this.classe)

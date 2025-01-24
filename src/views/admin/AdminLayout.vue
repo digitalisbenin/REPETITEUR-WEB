@@ -3,7 +3,7 @@
   <div class="flex h-screen">
     
    
-   <div class=" w-1/6 shadow-2xl bg-gray-800 text-white ">
+   <div class=" w-1/7 shadow-2xl bg-gray-800 text-white ">
     <div class="flex items-center justify-between">
       <div class="flex">
         <img src="../../assets/encadreur.png" alt="Logo" class="h-20 mt-1" />
@@ -255,7 +255,7 @@ export default {
       };
       //console.log(config);
       axios
-        .get("https://apirepetiteur.wadounnou.com/api/profile", config)
+        .get("https://www.api-mon-encadreur.com/api/profile", config)
         .then((response) => {
           this.name = response.data.name;
           localStorage.setItem("name", response.data.name);
@@ -291,10 +291,10 @@ export default {
 
       try {
         const response = await axios.get(
-          "https://apirepetiteur.wadounnou.com/api/logout",
+          "https://www.api-mon-encadreur.com/api/logout",
           config
         );
-        console.log(response);
+        //console.log(response);
         if (response.status === 204) {
           // TokenService.removeToken();
           localStorage.removeItem("token");

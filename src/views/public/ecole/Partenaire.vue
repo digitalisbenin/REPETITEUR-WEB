@@ -54,7 +54,7 @@
 
   methods:{
     getEcole(){
-      axios.get('https://apirepetiteur.wadounnou.com/api/ecoles',)
+      axios.get('https://www.api-mon-encadreur.com/api/ecoles',)
    .then(response => {
      this.ecole = response.data.data;
     // console.log( this.ecole);

@@ -132,7 +132,7 @@ export default {
       }
             };
             //console.log(config);https://apirepetiteur.wadounnou.com/
-     axios.get('https://apirepetiteur.wadounnou.com/api/profile',config)
+     axios.get('https://www.api-mon-encadreur.com/api/profile',config)
     .then(response => {
       this.user_id = response.data.id;
       this.name=response.data.name
@@ -153,7 +153,7 @@ export default {
   this.getMessage();
         },
         getAdmin(){
-    axios.get('https://apirepetiteur.wadounnou.com/api/users').then(res=>{
+    axios.get('https://www.api-mon-encadreur.com/api/users').then(res=>{
                 this.admin = res.data.data.filter(result =>
                    result.name === 'Supper Admin'
 
@@ -167,7 +167,7 @@ export default {
             });
 },
  getMessage(){
-    axios.get('https://apirepetiteur.wadounnou.com/api/messages').then(res=>{
+    axios.get('https://www.api-mon-encadreur.com/api/messages').then(res=>{
                 this.messagees = res.data.data.filter(result =>
                    result.user.id === this.user_id
 
@@ -198,7 +198,7 @@ saveDemande() {
   //console.log(config);
   //console.log(dataToSend);
 
-  axios.post('https://apirepetiteur.wadounnou.com/api/messages', dataToSend, config)
+  axios.post('https://www.api-mon-encadreur.com/api/messages', dataToSend, config)
     .then(response => {
       console.log(response.data);
 
@@ -214,17 +214,18 @@ saveDemande() {
 
         //console.log(notificationData);
 
-        axios.post('https://apirepetiteur.wadounnou.com/api/notifications', notificationData, config)
+        axios.post('https://www.api-mon-encadreur.com/api/notifications', notificationData, config)
           .then(notificationResponse => {
             console.log(notificationResponse.data);
 
             if (notificationResponse.status === 201) {
-              this.errorList = "Message envoyé avec succès";
+             // this.errorList = "Message envoyé avec succès";
              // alert('Message envoyé avec succès');
               Swal.fire({
                     title: 'Message envoyé avec succès',
                     icon: 'success',
-                    confirmButtonText: 'OK'
+                    showConfirmButton: false,
+                    timer: 5000
                   });
               this.$router.push('/admin/reponses');
             }
@@ -252,7 +253,8 @@ saveDemande() {
       Swal.fire({
                     title: "Quelques choses s'est mal passé veuillez réessayer plus tard",
                     icon: 'error',
-                    confirmButtonText: 'OK'
+                    showConfirmButton: false,
+                    timer: 5000
                   });
       context.errorList = error.response.data.errors;
     }
