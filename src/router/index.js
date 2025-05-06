@@ -35,7 +35,7 @@ import EnfantsCreate from '@/views/admin/Dashboard/Create.vue';
 import DemandeEnfants from '@/views/admin/Dashboard/Demande.vue';
 import DashLayout from '@/layouts/DashLayout.vue';
 import CommandeDash from '@/views/CommandeDash.vue';
-
+import PolitiqueEtConditions from '@/views/PolitiqueEtConditions.vue';
 //  import { authGuard } from '@/_helpers/auth-guard'
 
 
@@ -72,6 +72,11 @@ const router = createRouter({
         {path: '/examens', name: 'examens',component: Examens
         },
         {path: '/tutoriel', name: 'tutoriel',component: Tutoriel
+        },
+        {
+          path: '/politique-et-conditions',
+          name: 'PolitiqueEtConditions',
+          component: PolitiqueEtConditions,
         },
         {path: '/details/:id', name: 'details',component: DetailsRepetiteur
       },

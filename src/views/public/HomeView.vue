@@ -475,6 +475,10 @@
             <li>
               <a href="/login" class="hover:text-gray-400 text-lg">Connexion</a>
             </li>
+            <li>
+              <router-link to="/politique-et-conditions" class="hover:text-gray-400 text-lg" >Politique & Conditions</router-link>
+
+            </li>
           </ul>
         </div>
 
